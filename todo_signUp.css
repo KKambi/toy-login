@@ -1,0 +1,48 @@
+/* CSS Variables */
+:root{
+    --body-background-color: #F5F6F7;
+
+    --title-font-size: 1.5rem;
+    --title-font-color: #08A600;
+    --title-font-weight: 1000;
+
+    --content-font-size: 0.8rem;
+    --content-font-color: #000000;
+    --content-font-weight: 1000;
+
+    --error-font-color: #FF0000;
+
+    --button-background-color: #08A600;
+}
+
+body {
+    font-size: 10px;
+    background-color: var(--body-background-color); 
+}
+
+.wrapper {
+    font-size: var(--content-font-size);
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main div {
+    font-size: var(--content-font-size);
+    font-weight: var(--content-font-weight);
+    color: var(--content-font-color);
+    margin: 10px 0 10px 0;
+}
+
+#main__title--label {
+    font-size: var(--title-font-size);
+    font-weight: var(--title-font-weight);
+    color: var(--title-font-color);
+    text-align: center;
+}
+
