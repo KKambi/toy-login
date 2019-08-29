@@ -107,7 +107,6 @@ const validationPasswordReconfirm = {
     }
 }
 
-/* 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) */
 const validationName = {
     regExp: /[^a-zA-Z가-힣]/,
 
@@ -135,7 +134,31 @@ const validationName = {
     }
 }
 
+const validationGender = {
+    init(){
+        let inputForGender = document.querySelector("#gender");
+        dom_util.registerBlurEvent(inputForGender, this);
+    },
+
+    printMessage(type){
+        const messageNode = document.querySelector("#gender-message");
+        if (type == "empty") message.showMessage(messageNode);
+        if (type == "pass") message.hideMessage(messageNode);
+    },
+
+    validateInput(gender) {
+        if (is_util.isEmpty(gender)) return "empty";
+        return "pass";
+    }
+}
+
 validationForId.init();
 validationPassword.init();
 validationPasswordReconfirm.init();
 validationName.init();
+//validationBirthDate.init();
+validationGender.init();
+//validationEmail.init();
+//validationPhone.init();
+//tag.init();
+//term.init();

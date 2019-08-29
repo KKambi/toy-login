@@ -20,6 +20,9 @@ const message = {
     showMessage(element){
         element.setAttribute('style', 'display: block;');
     },
+    hideMessage(element){
+        element.setAttribute('style', 'display: none;');
+    },
     setMessageType(element, type){
         element.setAttribute('class', `message ${type}`);
     },
