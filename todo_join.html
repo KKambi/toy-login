@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="./reset.css">
-    <link rel="stylesheet" type="text/css" href="./todo_signUp.css">
+    <link rel="stylesheet" type="text/css" href="./todo_join.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <title>todo</title>
     <meta charset="UTF-8">
@@ -11,22 +11,20 @@
 
 <body>
     <header>
-        header
+        <h1 class="header-title">
+            회원가입
+        </h1>
     </header>
     <section>
         <form class="join_form" action="?">
             <div class="wrapper">
                 <div class="join-content">
-                    <div class="main__title">
-                        <div id="main__title--label">
-                            회원가입
-                        </div>
-                    </div>
                     <div class="join-row">
                         <h3 class="join-title">
                             아이디
                         </h3>
-                        <input id="id" name="id" type="text">
+                        <input id="id" name="id" type="text" maxlength="20">
+                        <span id="id-message" style="display: none;"></span>
                     </div>
                     <div class="join-row">
                         <h3 class="join-title">
@@ -118,9 +116,8 @@
         footer
     </footer>
 
-    <script>
-
-    </script>
+    <!-- JS -->
+    <script type="text/javascript" src="./validationForId.js"></script>
 
 </body>
 

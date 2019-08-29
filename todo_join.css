@@ -1,10 +1,13 @@
 /* CSS Variables */
 :root{
+    --default-margin: 10px;
+    --default-padding: 10px;
+
     --body-background-color: #F5F6F7;
     --body-font-family: 'Noto Sans KR', sans-serif;
 
     --title-font-size: 3rem;
-    --title-font-color: #08a600;
+    --title-font-color: #08A600;
     --title-font-weight: 900;
 
     --content-font-size: 1.3rem;
@@ -20,11 +23,16 @@
     --primary-button-size: 2rem;
     --primary-button-font-weight: 500;
 
+    --pass-font-color: #08A600;
     --error-font-color: #FF0000;
+    --message-font-size: 1.3rem;
+    --message-font-weight: 500;
+    --message-top-margin: 5px;
 
     --button-background-color: #08A600;
 }
 
+/* 최상위 CSS */
 :root .sel {
     -webkit-appearance: none;
     -moz-appearance: none; 
@@ -37,16 +45,35 @@
     text-decoration: underline;
 }
 
-html {
-    font-size: 10px;
-    font-family: var(--body-font-family);
-    background-color: var(--body-background-color); 
+:root .message {
+    font-size: var(--message-font-size);
+    font-weight: var(--message-font-weight);
+    margin-top: var(--message-top-margin);
+}
+:root .pass {
+    color: var(--pass-font-color);
+}
+:root .fail {
+    color: var(--error-font-color);
 }
 
+/* section */
 .wrapper {
     font-size: var(--content-font-size);
     display: flex;
     justify-content: center;
+}
+
+.header-title {
+    font-size: var(--title-font-size);
+    font-weight: var(--title-font-weight);
+    color: var(--title-font-color);
+    text-align: center;
+    margin: var(--default-margin) 0 var(--default-margin) 0;
+}
+
+.join-title {
+    margin-bottom: var(--default-margin);
 }
 
 .join-content {
@@ -59,7 +86,7 @@ html {
     font-size: var(--content-font-size);
     font-weight: var(--content-font-weight);
     color: var(--content-font-color);
-    margin: 10px 0 10px 0;
+    margin: var(--default-margin) 0 var(--default-margin) 0;
 }
 
 .join-row input, .join-content select {
@@ -76,16 +103,6 @@ html {
     border-color: var(--title-font-color);
 }
 
-#main__title--label {
-    font-size: var(--title-font-size);
-    font-weight: var(--title-font-weight);
-    color: var(--title-font-color);
-    text-align: center;
-}
-
-.join-title {
-    margin-bottom: 10px;
-}
 
 .birthdate-wrapper {
     display: flex;
@@ -93,7 +110,7 @@ html {
 }
 
 .birthdate-mm, .birthdate-dd {
-    padding-left: 10px;
+    padding-left: var(--default-padding);
 }
 
 .join-content .button-area {
@@ -107,7 +124,7 @@ html {
 }
 
 .button-join {
-    padding-left: 10px;
+    padding-left: var(--default-padding);
 }
 
 .primary-button {
