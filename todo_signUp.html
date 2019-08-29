@@ -1,91 +1,123 @@
 <!DOCTYPE html>
-<form>
+<html lang="ko">
 
-    <head>
-        <title>todo</title>
-        <link rel="stylesheet" type="text/css" href="./todo_signUp.css">
-    </head>
-    <header>
-        header
-    </header>
+<head>
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <link rel="stylesheet" type="text/css" href="./todo_signUp.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <title>todo</title>
+    <meta charset="UTF-8">
+</head>
+<header>
+    header
+</header>
 
-    <body>
+<body>
+    <form class="join_form" action="">
         <div class="wrapper">
-            <form action="">
-                <div class="main">
-                    <div class="main__title">
-                        <div id="main__title--label">
-                            회원가입
-                        </div>
-                    </div>
-                    <div class="main__id">
-                        <div class="main__id--label">
-                            아이디
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__password">
-                        <div class="main__id--label">
-                            비밀번호
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__password-reconfirm">
-                        <div class="main__id--label">
-                            비밀번호 재확인
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__name">
-                        <div class="main__id--label">
-                            이름
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__birth-date">
-                        <div class="main__id--label">
-                            생년월일
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__sex">
-                        <div class="main__id--label">
-                            성별
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__email">
-                        <div class="main__id--label">
-                            이메일
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__phone-number">
-                        <div class="main__id--label">
-                            휴대전화
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__interest">
-                        <div class="main__id--label">
-                            관심사
-                        </div>
-                        <input class="main__id--input" type="text">
-                    </div>
-                    <div class="main__buttons">
-                        <div class="main__id--label">
-                            버튼2개
-                        </div>
+            <div class="join-content">
+                <div class="main__title">
+                    <div id="main__title--label">
+                        회원가입
                     </div>
                 </div>
-            </form>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        아이디
+                    </h3>
+                    <input id="id" name="id" type="text">
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        비밀번호
+                    </h3>
+                    <input id="password" name="password" type="text">
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        비밀번호 재확인
+                    </h3>
+                    <input id="password-reconfirm" name="password-reconfirm" passtype="text">
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        이름
+                    </h3>
+                    <input id="name" name="name" type="text">
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        생년월일
+                    </h3>
+                    <div class="birthdate-wrapper">
+                        <span class="birthdate-yy">
+                            <input id="yy" name="yy" type="text">
+                        </span>
+                        <span class="birthdate-mm">
+                            <input id="mm" name="mm" type="text">
+                        </span>
+                        <span class="birthdate-dd">
+                            <input id="dd" name="dd" type="text">
+                        </span>
+                    </div>
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        성별
+                    </h3>
+                    <select id="gender" name="gender" class="sel" aria-label="성별">
+                        <option value="" selected="">성별</option>
+                        <option value="male">남자</option>
+                        <option value="female">여자</option>
+                    </select>
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        이메일
+                    </h3>
+                    <input id="email" type="text">
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        휴대전화
+                    </h3>
+                    <input id="phone" type="text">
+                </div>
+                <div class="join-row">
+                    <h3 class="join-title">
+                        관심사
+                    </h3>
+                    <input id="interest" type="text">
+                </div>
+                <div class="term-area">
+                    <span class="join-title underline">
+                        약관에 동의합니다.
+                    </span>
+                    <span class="term-box">
+                        <input type="checkbox" name="term" value="약관에 동의합니다.">
+                    </span>
+                </div>
+                <div class="button-area">
+                    <span class="button-initialize">
+                        <button class="primary-button">
+                            초기화
+                        </button>
+                    </span>
+                    <span class="button-join">
+                        <button class="primary-button">
+                            가입하기
+                        </button>
+                    </span>
+                </div>
+            </div>
         </div>
-        <script>
+    </form>
+    <script>
 
-        </script>
-    </body>
-    <footer>
-        footer
-    </footer>
+    </script>
+</body>
+<footer>
+    footer
+</footer>
 
-</form>
+</html>
