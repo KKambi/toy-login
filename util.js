@@ -1,5 +1,11 @@
-const getNode = function(selector){
-    return document.querySelector(selector);
+const dom_util = {
+    registerBlurEvent(element, caller){
+        element.addEventListener("blur", function(){
+            let inputValue = element.value;
+            let messageType = this.validateInput(inputValue)
+            this.printMessage(messageType);
+        }.bind(caller))
+    }
 }
 
 const message = {
@@ -13,13 +19,13 @@ const message = {
         element.innerHTML = message;
     },
     addPassMessage(selector, message){
-        const messageNode = getNode(selector)
+        const messageNode = document.querySelector(selector);
         this.showMessage(messageNode);
         this.setMessageType(messageNode, "pass");
         this.setMessage(messageNode, message);
     },
     addFailMessage(selector, message){
-        const messageNode = getNode(selector)
+        const messageNode = document.querySelector(selector);
         this.showMessage(messageNode);
         this.setMessageType(messageNode, "fail");
         this.setMessage(messageNode, message);

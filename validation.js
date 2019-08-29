@@ -8,16 +8,10 @@ const validationForId = {
     failMessage: "5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.",
 
     init(){
-        this.registerEvent();
-    },
-    registerEvent(){
         let inputForId = document.querySelector("#id");
-        inputForId.addEventListener("blur", () => {
-            let id = inputForId.value;
-            let messageType = this.validateId(id)
-            this.printMessage(messageType);
-        })
+        dom_util.registerBlurEvent(inputForId, this);
     },
+
     printMessage(type){
         if (type == "pass") message.addPassMessage("#id-message", this.passMessage);
         else message.addFailMessage("#id-message", this.failMessage)
@@ -29,7 +23,7 @@ const validationForId = {
     hasInvalidCharacter(id) {
         return this.regExp.test(id);
     },
-    validateId(id) {
+    validateInput(id) {
         if (this.satisfyLength(id) == false) return "fail"
         if (this.hasInvalidCharacter(id) == true) return "fail";
         return "pass";
@@ -50,16 +44,10 @@ const validationPassword = {
     failMessage_NotSpecial: "특수문자를 최소 1자 이상 포함해주세요.",
 
     init(){
-        this.registerEvent();
+        let inputForPassword = document.querySelector("#password");
+        dom_util.registerBlurEvent(inputForPassword, this);
     },
-    registerEvent(){
-        let inputForPassword = getNode("#password");
-        inputForPassword.addEventListener("blur", () => {
-            let password = inputForPassword.value;
-            let messageType = this.validatePassword(password)
-            this.printMessage(messageType);
-        })
-    },
+
     printMessage(type){
         if (type == "pass") message.addPassMessage("#password-message", this.passMessage);
         if (type == "fail_Length") message.addFailMessage("#password-message", this.failMessage_Length)
@@ -80,7 +68,7 @@ const validationPassword = {
     hasSpecial(password) {
         return this.regExp_Special.test(password);
     },
-    validatePassword(password) {
+    validateInput(password) {
         if (this.satisfyLength(password) == false) return "fail_Length";
         if (this.hasUpperCase(password) == false) return "fail_UpperCase";
         if (this.hasNumber(password) == false) return "fail_Number";
@@ -89,5 +77,30 @@ const validationPassword = {
     }
 }
 
+const validationPasswordReconfirm = {
+    passMessage: "비밀번호가 일치합니다.",
+    failMessage: "비밀번호가 일치하지 않습니다.",
+
+    init(){
+        let inputForPasswordReconfirm = document.querySelector("#password-reconfirm");
+        dom_util.registerBlurEvent(inputForPasswordReconfirm, this);
+    },
+
+    printMessage(type){
+        if (type == "pass") message.addPassMessage("#password-reconfirm-message", this.passMessage);
+        if (type == "fail") message.addFailMessage("#password-reconfirm-message", this.failMessage);
+    },
+
+    isEqual(passwordReconfirm) {
+        const password = document.querySelector("#password").value;
+        return password === passwordReconfirm;
+    },
+    validateInput(passwordReconfirm) {
+        if (this.isEqual(passwordReconfirm) == false) return "fail";
+        return "pass";
+    }
+}
+
 validationForId.init();
 validationPassword.init();
+validationPasswordReconfirm.init();
