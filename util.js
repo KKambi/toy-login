@@ -1,3 +1,9 @@
+const is_util = {
+    isEmpty(input){
+        return (input === undefined || input === null || input.length === 0);
+    }
+}
+
 const dom_util = {
     registerBlurEvent(element, caller){
         element.addEventListener("blur", function(){
@@ -9,6 +15,8 @@ const dom_util = {
 }
 
 const message = {
+    emptyMessage: "필수 정보입니다.",
+
     showMessage(element){
         element.setAttribute('style', 'display: block;');
     },
