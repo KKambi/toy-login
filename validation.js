@@ -109,32 +109,28 @@ const validationPasswordReconfirm = {
 
 /* 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) */
 const validationName = {
-    minLength: 5,
+    regExp: /[^a-zA-Z가-힣]/,
 
-    regExp: /[^a-z0-9\_\-]/,
-
-    passMessage: "사용 가능한 아이디입니다.",
-    failMessage: "5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.",
+    passMessage: "멋진 이름이네요!",
+    failMessage: "한글과 영문 대 소문자를 사용하세요. (특수기호, 공백, 숫자 사용 불가)",
 
     init(){
-        let inputForId = document.querySelector("#id");
-        dom_util.registerBlurEvent(inputForId, this);
+        let inputForName = document.querySelector("#name");
+        dom_util.registerBlurEvent(inputForName, this);
     },
 
     printMessage(type){
-        if (type == "pass") message.addPassMessage("#id-message", this.passMessage);
-        else message.addFailMessage("#id-message", this.failMessage)
+        if (type == "empty") message.addFailMessage("#name-message", message.emptyMessage);
+        if (type == "pass") message.addPassMessage("#name-message", this.passMessage);
+        if (type == "fail") message.addFailMessage("#name-message", this.failMessage)
     },
 
-    satisfyLength(id) {  
-        return this.minLength <= id.length;
-    },    
-    hasInvalidCharacter(id) {
-        return this.regExp.test(id);
+    hasInvalidCharacter(name) {
+        return this.regExp.test(name);
     },
-    validateInput(id) {
-        if (this.satisfyLength(id) == false) return "fail"
-        if (this.hasInvalidCharacter(id) == true) return "fail";
+    validateInput(name) {
+        if (is_util.isEmpty(name)) return "empty";
+        if (this.hasInvalidCharacter(name) == true) return "fail";
         return "pass";
     }
 }
