@@ -41,9 +41,7 @@ const validationPassword = {
 
     passMessage: "안전한 비밀번호입니다.",
     failMessage_Length: "8자 이상 16자 이하로 입력해주세요.",
-    failMessage_UpperCase: "영문 대문자를 최소 1자 이상 포함해주세요.",
-    failMessage_Number: "숫자를 최소 1자 이상 포함해주세요.",
-    failMessage_NotSpecial: "특수문자를 최소 1자 이상 포함해주세요.",
+    failMessage_Character: "영문 대문자, 숫자, 특수문자를 최소 1자 이상 포함해주세요.",
 
     init(){
         let inputForPassword = document.querySelector("#password");
@@ -54,9 +52,7 @@ const validationPassword = {
         if (type == "empty") message.addFailMessage("#password-message", message.emptyMessage);
         if (type == "pass") message.addPassMessage("#password-message", this.passMessage);
         if (type == "fail_Length") message.addFailMessage("#password-message", this.failMessage_Length)
-        if (type == "fail_UpperCase") message.addFailMessage("#password-message", this.failMessage_UpperCase)
-        if (type == "fail_Number") message.addFailMessage("#password-message", this.failMessage_Number)
-        if (type == "fail_NotSpecial") message.addFailMessage("#password-message", this.failMessage_NotSpecial)
+        if (type == "fail_Character") message.addFailMessage("#password-message", this.failMessage_Character)
     },
 
     satisfyLength(password) {  
@@ -74,9 +70,9 @@ const validationPassword = {
     validateInput(password) {
         if (is_util.isEmpty(password)) return "empty";
         if (this.satisfyLength(password) == false) return "fail_Length";
-        if (this.hasUpperCase(password) == false) return "fail_UpperCase";
-        if (this.hasNumber(password) == false) return "fail_Number";
-        if (this.hasSpecial(password) == false) return "fail_NotSpecial";
+        if (this.hasUpperCase(password) == false
+            || this.hasNumber(password) == false
+            || this.hasSpecial(password) == false) return "fail_Character";
         return "pass";
     }
 }
@@ -152,13 +148,37 @@ const validationGender = {
     }
 }
 
+const validationEmail = {
+    regExp_Email: /^[\w\-]+@[a-zA-Z]+\.[a-zA-Z]{2,}/,
+
+    init(){
+        let inputForEmail = document.querySelector("#email");
+        dom_util.registerBlurEvent(inputForEmail, this);
+    },
+
+    printMessage(type){
+        const messageNode = document.querySelector("#email-message");
+        if (type == "fail") message.showMessage(messageNode);
+        if (type == "pass") message.hideMessage(messageNode);
+    },
+
+    hasValidForm(email) {
+        return this.regExp_Email.test(email);
+    },
+    validateInput(email) {
+        if (is_util.isEmpty(email)) return "fail";
+        if (this.hasValidForm(email) === false) return "fail";
+        return "pass";
+    }
+}
+
 validationForId.init();
 validationPassword.init();
 validationPasswordReconfirm.init();
 validationName.init();
 //validationBirthDate.init();
 validationGender.init();
-//validationEmail.init();
+validationEmail.init();
 //validationPhone.init();
 //tag.init();
 //term.init();
