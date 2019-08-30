@@ -44,8 +44,8 @@ const validationPassword = {
     printMessage: {
         empty: () => { messageUtil.addFailMessage("#password-message", message.emptyMessage); },
         pass: () => { messageUtil.addPassMessage("#password-message", message.password.pass); },
-        fail_Length: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Length); },
-        fail_Character: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Character); }
+        fail_length: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Length); },
+        fail_character: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Character); }
     },
 
     init(){
@@ -67,10 +67,10 @@ const validationPassword = {
     },
     validateInput(password) {
         if (is_util.isEmpty(password)) return "empty";
-        if (this.satisfyLength(password) == false) return "fail_Length";
+        if (this.satisfyLength(password) == false) return "fail_length";
         if (this.hasUpperCase(password) == false
             || this.hasNumber(password) == false
-            || this.hasSpecial(password) == false) return "fail_Character";
+            || this.hasSpecial(password) == false) return "fail_character";
         return "pass";
     }
 }
@@ -200,12 +200,11 @@ const validationBirthDate = {
     regExp_Year: /\d{4}/,
 
     printMessage: {
-        empty: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.year); },
+        empty: undefined,
         pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
-        fail_Range: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.range); },
-        fail_Year: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.year); },
-        fail_Month: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.month); },
-        fail_Day: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.day); }
+        fail_range: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.range); },
+        fail_invalid: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.invalid); },
+        fail_day: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.day); }
     },
 
     getInputArray(nodeArray){
@@ -227,11 +226,28 @@ const validationBirthDate = {
     has4digitYear(year) {
         return this.regExp_Year.test(year);
     },
-    //TODO: 나머지에 대한 검증함수 만들어야함
+    isInvalidYear(year){
+        const currentYear = new Date().getFullYear();
+        const comeFromPast = (currentYear - year) >= 100;
+        const comeFromFuture = (currentYear - year) < 0;
+        return (comeFromPast || comeFromFuture);
+    },
+    isValidDay(year, month, day){
+        const currentDate = new Date(year, month, 0);
+        const finalDay = currentDate.getDate();
+        return (1 <= day && day <= finalDay);
+    },
     validateInput(birthDate) {
         const [year, month, day] = birthDate;
-        if (is_util.isEmpty(year)) return "empty";
-        if (this.has4digitYear(year) == false) return "fail_Year";
+        if (is_util.isEmpty(year)) return "fail_invalid";
+        if (this.has4digitYear(year) == false) return "fail_invalid";
+        if (this.isInvalidYear(year) == true) return "fail_range";
+
+        if (is_util.isEmpty(month)) return "fail_invalid";
+
+        if (is_util.isEmpty(day)) return "fail_invalid";
+        if (this.isValidDay(year, month, day) == false) return "fail_day";
+
         return "pass";
     }
 }
