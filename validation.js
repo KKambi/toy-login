@@ -1,6 +1,13 @@
+//constant variable object
+const constant = {
+    idMinLength: 5,
+    passwordMinLength: 8,
+
+}
+
 //Object Literal for Validation
 const validationForId = {
-    minLength: 5,
+    minLength: constant.idMinLength,
 
     regExp: /[^a-z0-9\_\-]/,
     
@@ -33,7 +40,7 @@ const validationForId = {
 }
 
 const validationPassword = {
-    minLength: 8,
+    minLength: constant.passwordMinLength,
 
     regExp_UpperCase: /[A-Z]/,
     regExp_Number: /[0-9]/,
@@ -172,6 +179,33 @@ const validationEmail = {
     }
 }
 
+const validationPhone = {
+    regExp_10digit: /(010)(\d{3})(\d{4})/,
+    regExp_11digit: /(010)(\d{4})(\d{4})/,
+
+    init(){
+        let inputForPhone = document.querySelector("#phone");
+        dom_util.registerBlurEvent(inputForPhone, this);
+    },
+
+    printMessage(type){
+        const messageNode = document.querySelector("#phone-message");
+        if (type == "fail") message.showMessage(messageNode);
+        if (type == "pass") message.hideMessage(messageNode);
+    },
+
+    hasValidForm(phone) {
+        if (phone.length === 10) return this.regExp_10digit.test(phone);
+        if (phone.length === 11) return this.regExp_11digit.test(phone);
+        return false;
+    },
+    validateInput(phone) {
+        if (is_util.isEmpty(phone)) return "fail";
+        if (this.hasValidForm(phone) === false) return "fail";
+        return "pass";
+    }
+}
+
 validationForId.init();
 validationPassword.init();
 validationPasswordReconfirm.init();
@@ -179,6 +213,6 @@ validationName.init();
 //validationBirthDate.init();
 validationGender.init();
 validationEmail.init();
-//validationPhone.init();
+validationPhone.init();
 //tag.init();
 //term.init();
