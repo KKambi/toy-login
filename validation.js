@@ -2,7 +2,6 @@
 const constant = {
     idMinLength: 5,
     passwordMinLength: 8,
-
 }
 
 //Object Literal for Validation
@@ -10,19 +9,15 @@ const validationForId = {
     minLength: constant.idMinLength,
 
     regExp: /[^a-z0-9\_\-]/,
-    
-    passMessage: "사용 가능한 아이디입니다.",
-    failMessage: "5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.",
+    printMessage: {
+        empty: () => { messageUtil.addFailMessage("#id-message", message.emptyMessage); },
+        pass: () => { messageUtil.addPassMessage("#id-message", message.id.pass); },
+        fail: () => { messageUtil.addFailMessage("#id-message", message.id.fail); },
+    },
 
     init(){
         let inputForId = document.querySelector("#id");
         dom_util.registerBlurEvent(inputForId, this);
-    },
-
-    printMessage(type){
-        if (type == "empty") message.addFailMessage("#id-message", message.emptyMessage);
-        if (type == "pass") message.addPassMessage("#id-message", this.passMessage);
-        if (type == "fail") message.addFailMessage("#id-message", this.failMessage);
     },
 
     satisfyLength(id) {  
@@ -46,20 +41,16 @@ const validationPassword = {
     regExp_Number: /[0-9]/,
     regExp_Special: /[^0-9a-zA-Z\n\t\s]/,
 
-    passMessage: "안전한 비밀번호입니다.",
-    failMessage_Length: "8자 이상 16자 이하로 입력해주세요.",
-    failMessage_Character: "영문 대문자, 숫자, 특수문자를 최소 1자 이상 포함해주세요.",
+    printMessage: {
+        empty: () => { messageUtil.addFailMessage("#password-message", message.emptyMessage); },
+        pass: () => { messageUtil.addPassMessage("#password-message", message.password.pass); },
+        fail_Length: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Length); },
+        fail_Character: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Character); }
+    },
 
     init(){
         let inputForPassword = document.querySelector("#password");
         dom_util.registerBlurEvent(inputForPassword, this);
-    },
-
-    printMessage(type){
-        if (type == "empty") message.addFailMessage("#password-message", message.emptyMessage);
-        if (type == "pass") message.addPassMessage("#password-message", this.passMessage);
-        if (type == "fail_Length") message.addFailMessage("#password-message", this.failMessage_Length)
-        if (type == "fail_Character") message.addFailMessage("#password-message", this.failMessage_Character)
     },
 
     satisfyLength(password) {  
@@ -85,18 +76,15 @@ const validationPassword = {
 }
 
 const validationPasswordReconfirm = {
-    passMessage: "비밀번호가 일치합니다.",
-    failMessage: "비밀번호가 일치하지 않습니다.",
+    printMessage: {
+        empty: () => { messageUtil.addFailMessage("#password-reconfirm-message", message.emptyMessage); },
+        pass: () => { messageUtil.addPassMessage("#password-reconfirm-message", message.passwordReconfirm.pass); },
+        fail: () => { messageUtil.addFailMessage("#password-reconfirm-message", message.passwordReconfirm.fail); }
+    },
 
     init(){
         let inputForPasswordReconfirm = document.querySelector("#password-reconfirm");
         dom_util.registerBlurEvent(inputForPasswordReconfirm, this);
-    },
-
-    printMessage(type){
-        if (type == "empty") message.addFailMessage("#password-reconfirm-message", message.emptyMessage);
-        if (type == "pass") message.addPassMessage("#password-reconfirm-message", this.passMessage);
-        if (type == "fail") message.addFailMessage("#password-reconfirm-message", this.failMessage);
     },
 
     isEqual(passwordReconfirm) {
@@ -111,20 +99,18 @@ const validationPasswordReconfirm = {
 }
 
 const validationName = {
+    messageNode: document.querySelector("#name-message"),
     regExp: /[^a-zA-Z가-힣]/,
 
-    passMessage: "멋진 이름이네요!",
-    failMessage: "한글과 영문 대 소문자를 사용하세요. (특수기호, 공백, 숫자 사용 불가)",
+    printMessage: {
+        empty: () => { messageUtil.addFailMessage("#name-message", message.emptyMessage); },
+        pass: () => { messageUtil.addPassMessage("#name-message", message.name.pass); },
+        fail: () => { messageUtil.addFailMessage("#name-message", message.name.fail); }
+    },
 
     init(){
         let inputForName = document.querySelector("#name");
         dom_util.registerBlurEvent(inputForName, this);
-    },
-
-    printMessage(type){
-        if (type == "empty") message.addFailMessage("#name-message", message.emptyMessage);
-        if (type == "pass") message.addPassMessage("#name-message", this.passMessage);
-        if (type == "fail") message.addFailMessage("#name-message", this.failMessage)
     },
 
     hasInvalidCharacter(name) {
@@ -138,15 +124,16 @@ const validationName = {
 }
 
 const validationGender = {
+    messageNode: document.querySelector("#gender-message"),
+    printMessage: {
+        empty: (messageNode) => { messageUtil.showMessage(messageNode); },
+        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
+        fail: undefined,
+    },
+
     init(){
         let inputForGender = document.querySelector("#gender");
         dom_util.registerBlurEvent(inputForGender, this);
-    },
-
-    printMessage(type){
-        const messageNode = document.querySelector("#gender-message");
-        if (type == "empty") message.showMessage(messageNode);
-        if (type == "pass") message.hideMessage(messageNode);
     },
 
     validateInput(gender) {
@@ -156,17 +143,18 @@ const validationGender = {
 }
 
 const validationEmail = {
+    messageNode: document.querySelector("#email-message"),
     regExp_Email: /^[\w\-]+@[a-zA-Z]+\.[a-zA-Z]{2,}/,
+    
+    printMessage: {
+        empty: undefined,
+        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
+        fail: (messageNode) => { messageUtil.showMessage(messageNode); },
+    },
 
     init(){
         let inputForEmail = document.querySelector("#email");
         dom_util.registerBlurEvent(inputForEmail, this);
-    },
-
-    printMessage(type){
-        const messageNode = document.querySelector("#email-message");
-        if (type == "fail") message.showMessage(messageNode);
-        if (type == "pass") message.hideMessage(messageNode);
     },
 
     hasValidForm(email) {
@@ -180,18 +168,19 @@ const validationEmail = {
 }
 
 const validationPhone = {
+    messageNode: document.querySelector("#phone-message"),
     regExp_10digit: /(010)(\d{3})(\d{4})/,
     regExp_11digit: /(010)(\d{4})(\d{4})/,
+
+    printMessage: {
+        empty: undefined,
+        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
+        fail: (messageNode) => { messageUtil.showMessage(messageNode); },
+    },
 
     init(){
         let inputForPhone = document.querySelector("#phone");
         dom_util.registerBlurEvent(inputForPhone, this);
-    },
-
-    printMessage(type){
-        const messageNode = document.querySelector("#phone-message");
-        if (type == "fail") message.showMessage(messageNode);
-        if (type == "pass") message.hideMessage(messageNode);
     },
 
     hasValidForm(phone) {
@@ -206,11 +195,52 @@ const validationPhone = {
     }
 }
 
+const validationBirthDate = {
+    messageNode: document.querySelector("#birthdate-message"),
+    regExp_Year: /\d{4}/,
+
+    printMessage: {
+        empty: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.year); },
+        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
+        fail_Range: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.range); },
+        fail_Year: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.year); },
+        fail_Month: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.month); },
+        fail_Day: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.day); }
+    },
+
+    getInputArray(nodeArray){
+        const inputArray = nodeArray.map(node => node.value);
+        return inputArray;
+    },
+
+    init(){
+        const nodeArray = [document.querySelector("#yy"), document.querySelector("#mm"), document.querySelector("#dd")]; 
+        nodeArray.forEach((element) => {
+            element.addEventListener("blur", function(){
+                let inputArray = this.getInputArray(nodeArray);
+                let messageType = this.validateInput(inputArray)
+                this.printMessage[messageType](this.messageNode);
+            }.bind(validationBirthDate))
+        })
+    },
+
+    has4digitYear(year) {
+        return this.regExp_Year.test(year);
+    },
+    //TODO: 나머지에 대한 검증함수 만들어야함
+    validateInput(birthDate) {
+        const [year, month, day] = birthDate;
+        if (is_util.isEmpty(year)) return "empty";
+        if (this.has4digitYear(year) == false) return "fail_Year";
+        return "pass";
+    }
+}
+
 validationForId.init();
 validationPassword.init();
 validationPasswordReconfirm.init();
 validationName.init();
-//validationBirthDate.init();
+validationBirthDate.init();
 validationGender.init();
 validationEmail.init();
 validationPhone.init();

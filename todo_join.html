@@ -53,15 +53,16 @@
                         </h3>
                         <div class="birthdate-wrapper">
                             <span class="birthdate-yy">
-                                <input id="yy" name="yy" type="text">
+                                <input id="yy" name="yy" type="text" placeholder="년(4자)" maxlength="4">
                             </span>
                             <span class="birthdate-mm">
                                 <input id="mm" name="mm" type="text">
                             </span>
                             <span class="birthdate-dd">
-                                <input id="dd" name="dd" type="text">
+                                <input id="dd" name="dd" type="text" placeholder="일">
                             </span>
                         </div>
+                        <span id="birthdate-message" class="message fail" style="display: none;"></span>
                     </div>
                     <div class="join-row">
                         <h3 class="join-title">
