@@ -41,6 +41,11 @@
     background-size: 20px 8px;
 }
 
+:root .txtarea {
+    overflow: hidden;
+    resize: none;
+}
+
 :root .underline {
     text-decoration: underline;
 }
@@ -89,7 +94,7 @@
     margin: var(--default-margin) 0 var(--default-margin) 0;
 }
 
-.join-row input, .join-content select {
+.join-row input, .join-content select, #interest  {
     width: 100%;
     height: var(--input-height);
     border-color: var(--input-border-color);
@@ -99,10 +104,9 @@
     padding: var(--input-padding-up-down) var(--input-padding-left-right) var(--input-padding-up-down) var(--input-padding-left-right);
 }
 
-.join-row input:focus, .join-content select:focus {
+.join-row input:focus, .join-content select:focus, #interest:focus {
     border-color: var(--title-font-color);
 }
-
 
 .birthdate-wrapper {
     display: flex;

@@ -260,5 +260,4 @@ validationBirthDate.init();
 validationGender.init();
 validationEmail.init();
 validationPhone.init();
-//tag.init();
 //term.init();
