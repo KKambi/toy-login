@@ -1,6 +1,7 @@
 const tags = {
     input: document.querySelector("#interest"),
     wrapper: document.querySelector(".interest-input-wrapper"),
+    defaultSize: 1,
 
     addFocus: function(wrapper=this.wrapper){
         wrapper.addEventListener("click", function(){
@@ -27,15 +28,18 @@ const tags = {
     },
 
     addAutoChangeSize: function(input = this.input){
-        input.addEventListener('keydown', function(){
+        input.addEventListener('keyup', function(keyEvent){
+            if (keyEvent.key === ',') return;
             let length = input.value.length
-            input.setAttribute("size", `${length+1}`)
+            input.setAttribute("size", `${length}`)
         })
     },
 
     initInput: function (input = this.input) {
         input.value = ""
-        console.log(input)
+    },
+    initSize: function (input = this.input) {
+        input.setAttribute("size", this.defaultSize)
     }
 }
 
@@ -52,6 +56,7 @@ const interest = {
             if (exceptionKey.indexOf(currentKey) === 2) {
                 tags.addTag(tagString)
                 tags.initInput()
+                tags.initSize()
             }
             //백스페이스, 딜리트일 때
             else {
