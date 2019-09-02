@@ -252,6 +252,29 @@ const validationBirthDate = {
     }
 }
 
+const validationInterest = {
+    messageNode: document.querySelector("#interest-message"),
+    minimun: 3,
+
+    printMessage: {
+        empty: undefined,
+        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
+        fail: (messageNode) => { messageUtil.showMessage(messageNode); },
+    },
+
+    init(){
+        let interstWrapper = document.querySelector(".interest-input-wrapper");
+        interstWrapper.addEventListener("focusout", function(){
+            const type = this.validateInterest(tags.tagList)
+            this.printMessage[type](this.messageNode)
+        }.bind(this))
+    },
+    validateInterest(tagList) {
+        if (tagList.length < this.minimun) return "fail"
+        return "pass"
+    }
+}
+
 validationForId.init();
 validationPassword.init();
 validationPasswordReconfirm.init();
@@ -260,4 +283,5 @@ validationBirthDate.init();
 validationGender.init();
 validationEmail.init();
 validationPhone.init();
+validationInterest.init();
 //term.init();

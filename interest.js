@@ -5,7 +5,7 @@ const tags = {
     tagList: [],
 
     addFocus: function(wrapper=this.wrapper){
-        wrapper.addEventListener("click", function(){
+        wrapper.addEventListener("focusin", function(){
             dom_util.addClass(wrapper, "focus")
         })
         wrapper.addEventListener("focusout", function(){
@@ -16,7 +16,7 @@ const tags = {
         input.addEventListener('keyup', function(keyEvent){
             if (keyEvent.key === ',') return;
             let length = input.value.length
-            input.setAttribute("size", `${length}`)
+            input.setAttribute("size", `${length<=0? 1:length}`)
         })
     },
     addClose: function(aNode, removeTag = this.removeTag, tagList = this.tagList){
@@ -25,6 +25,13 @@ const tags = {
             removeTag(tagList, spanNode.innerText)
             spanNode.parentNode.removeChild(spanNode)
         })
+    },
+    addValidateEvent: function(aNode){
+        aNode.addEventListener("click", function(){
+            const type = validationInterest.validateInterest(this.tagList)
+            const messageNode = document.querySelector("#interest-message")
+            validationInterest.printMessage[type](messageNode)
+        }.bind(this))
     },
     addTag: function (tagString, input = this.input, wrapper = this.wrapper) {
         if (tagString.length === 0) return;
@@ -37,6 +44,7 @@ const tags = {
         const aNode = document.createElement('a')
         const x = document.createTextNode('x')
         this.addClose(aNode)
+        this.addValidateEvent(aNode)
         aNode.appendChild(x)
         spanNode.appendChild(aNode)
         
@@ -46,7 +54,6 @@ const tags = {
     removeTag: function(tagList, tagString){
         let tagIndex = tagList.indexOf(tagString)
         tagList.splice(tagIndex, 1)
-        console.log(tagList)
     },
     
     initInput: function (input = this.input) {
