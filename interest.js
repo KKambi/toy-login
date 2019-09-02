@@ -19,12 +19,12 @@ const tags = {
             input.setAttribute("size", `${length<=0? 1:length}`)
         })
     },
-    addClose: function(aNode, removeTag = this.removeTag, tagList = this.tagList){
+    addClose: function(aNode){
         aNode.addEventListener('click', function(){
             let spanNode = aNode.parentElement
-            removeTag(tagList, spanNode.innerText)
+            this.removeTag(this.tagList, spanNode.innerText)
             spanNode.parentNode.removeChild(spanNode)
-        })
+        }.bind(this))
     },
     addValidateEvent: function(aNode){
         aNode.addEventListener("click", function(){
@@ -33,6 +33,7 @@ const tags = {
             validationInterest.printMessage[type](messageNode)
         }.bind(this))
     },
+
     addTag: function (tagString, input = this.input, wrapper = this.wrapper) {
         if (tagString.length === 0) return;
         
@@ -55,6 +56,21 @@ const tags = {
         let tagIndex = tagList.indexOf(tagString)
         tagList.splice(tagIndex, 1)
     },
+    modifyTag: function(inputStng, input = this.input, tagList = this.tagList){
+        if (inputStng.length >= 1) return;  //길이가 0일 때 백스페이스, 딜리트가 들어왔으면 작동한다.
+        if (tagList.length <=0 ) return; //지울 노드가 없다면 종료
+
+        let spanNode = this.wrapper
+        .lastChild
+        .previousSibling
+        .previousSibling
+        spanNode.parentNode.removeChild(spanNode)
+        
+        let tagString = tagList[tagList.length-1]
+        this.removeTag(tagList, tagString)
+        input.value = tagString
+        input.size = tagString.length
+    },
     
     initInput: function (input = this.input) {
         input.value = ""
@@ -67,23 +83,32 @@ const tags = {
 const interest = {
     init() {
         const txtNode = document.querySelector("#interest")
-        txtNode.addEventListener("keyup", (inputChar) => {
-            let exceptionKey = ["Backspace", "Delete", ","]
-            let tagString = tags.input.value.trim()
-            tagString = tagString.slice(0, -1)
+        let exceptionKey = ["Backspace", "Delete", ","]
+        
+        //쉼표일 때의 이벤트 추가
+        txtNode.addEventListener("keyup", function(inputChar){
             let currentKey = inputChar.key
-
-            //쉼표일 때
-            if (exceptionKey.indexOf(currentKey) === 2) {
-                tags.addTag(tagString)
+            let inputString = tags.input.value
+            inputString = inputString.slice(0, -1)
+            
+            let currentKeyIndex = exceptionKey.indexOf(currentKey)
+            if (currentKeyIndex === 2) {
+                tags.addTag(inputString)
                 tags.initInput()
                 tags.initSize()
             }
-            //백스페이스, 딜리트일 때
-            else {
-                //TODO: 태그 마지막 글자를 지우고 input에 나머지를 채우는 행동
+        }.bind(tags))
+
+        //백스페이스, 딜리트일 때의 이벤트 추가
+        txtNode.addEventListener("keydown", function(inputChar){
+            let currentKey = inputChar.key
+            let inputString = tags.input.value
+            
+            let currentKeyIndex = exceptionKey.indexOf(currentKey)
+            if (currentKeyIndex === 0 || currentKeyIndex === 1){
+                tags.modifyTag(inputString)
             }
-        })
+        }.bind(tags))
     }
 }
 
