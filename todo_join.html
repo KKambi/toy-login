@@ -124,7 +124,7 @@
                     </div>
                     <div class="button-area">
                         <span class="button-initialize">
-                            <button class="primary-button">
+                            <button class="primary-button" id="initialization-button">
                                 초기화
                             </button>
                         </span>
@@ -138,7 +138,7 @@
             </div>
         </form>
 
-        <!-- 모달 -->
+        <!-- 약관모달 -->
         <div class="modal hidden">
             <div class="modal__overlay"></div>
             <div class="modal__content">
@@ -157,6 +157,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- 초기화모달 -->
+        <div class="modal hidden">
+                <div class="modal__overlay init__overlay"></div>
+                <div class="modal__content init__content">
+                    <h2>모든 내용을 새로 작성하시겠습니까?</h2>
+                    <div class="init-row">
+                        <div>
+                            <button class="primary-button init__agree">
+                                확인
+                            </button>
+                        </div>
+                        <div>
+                            <button class="primary-button init__cancel">
+                                취소
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
     <footer>
         footer
