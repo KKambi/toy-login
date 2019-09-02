@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="./reset.css">
     <link rel="stylesheet" type="text/css" href="./todo_join.css">
+    <link rel="stylesheet" type="text/css" href="./todo_join_modal.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <title>todo</title>
     <meta charset="UTF-8">
@@ -16,6 +17,7 @@
         </h1>
     </header>
     <section>
+        <!-- 회원가입 폼 -->
         <form class="join_form" action="?">
             <div class="wrapper">
                 <div class="join-content">
@@ -117,7 +119,7 @@
                             약관에 동의합니다.
                         </span>
                         <span class="term-box">
-                            <input type="checkbox" name="term">
+                            <input type="checkbox" id="term-box__checkbox" name="term" disabled="">
                         </span>
                     </div>
                     <div class="button-area">
@@ -135,6 +137,26 @@
                 </div>
             </div>
         </form>
+
+        <!-- 모달 -->
+        <div class="modal hidden">
+            <div class="modal__overlay"></div>
+            <div class="modal__content">
+                <div class="modal-row">
+                    <a>X</a>
+                </div>
+                <div class="modal-row">개인정보 수집 및 이용에 대한 안내</div>
+                <div class="modal-row">
+                    <div id="modal__term">
+                    </div>
+                </div>
+                <div class="modal-row">
+                    <button class="primary-button term-button">
+                        동의
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
     <footer>
         footer
@@ -144,6 +166,7 @@
     <script src="./util.js"></script>
     <script src="./validation.js"></script>
     <script src="./interest.js"></script>
+    <script src="./todo_join_modal.js"></script>
 
 </body>
 

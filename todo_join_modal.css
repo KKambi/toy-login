@@ -1,0 +1,79 @@
+:root{
+    --modal-bakground-color: #F5F6F7;
+    
+    --term-background-color: #ffffff;
+    --term-border-color: #DADADA;
+    --term-border-width: 1px;
+}
+
+/* 
+모달 출처
+https://gist.github.com/serranoarevalo/9f1f795e49c1ea1b020ca5af05813b0b
+*/
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__overlay{
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.modal__content {
+    background-color: var(--modal-bakground-color);
+    padding: 10px 10px 10px 30px;
+    position: relative;
+    width: 40%;
+    height: 80%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    font-size: 1.8em;
+}
+
+.modal-row a{
+    text-align: right;
+}
+
+.modal__content .modal-row:nth-child(1){
+    text-align: right;
+    font-weight: bold;
+}
+
+.modal__content .modal-row:nth-child(3){
+    margin: 2rem;
+    height: 60%;
+    font-weight: 500;
+    padding: 10px;
+    background-color: var(--term-background-color);
+    border-color: var(--term-border-color);
+    border-width: var(--term-border-width);
+    border-style: solid;
+}
+
+.modal__content .modal-row:nth-child(4){
+    text-align: center;
+}
+
+#modal__term{
+    font-size: 1.3rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 100%;
+    line-height: 1.7rem;
+}
+
+.term-button{
+    width: 30%;
+}
+
+.hidden{
+    display: none;
+}
