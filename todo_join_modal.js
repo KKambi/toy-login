@@ -1,4 +1,6 @@
 const term = {
+    state: "fail",
+    joinError: "약관을 읽고 동의해주세요.",
     message: `
         정보통신망법 규정에 따라 부스트캠프에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
         <br><br>
@@ -82,7 +84,9 @@ const term = {
                     //체크박스가 체크된다.
                     let checkBox = document.querySelector("#term-box__checkbox")
                     checkBox.setAttribute("checked", "")
-                    checkBox.removeAttribtue("disabled")
+
+                    //state를 pass로 만든다.
+                    term.state = "pass"
                 })
             }
         })

@@ -129,7 +129,7 @@
                             </button>
                         </span>
                         <span class="button-join">
-                            <button class="primary-button">
+                            <button class="primary-button" id="join-button">
                                 가입하기
                             </button>
                         </span>
@@ -160,23 +160,40 @@
 
         <!-- 초기화모달 -->
         <div class="modal hidden">
-                <div class="modal__overlay init__overlay"></div>
-                <div class="modal__content init__content">
-                    <h2>모든 내용을 새로 작성하시겠습니까?</h2>
-                    <div class="init-row">
-                        <div>
-                            <button class="primary-button init__agree">
-                                확인
-                            </button>
-                        </div>
-                        <div>
-                            <button class="primary-button init__cancel">
-                                취소
-                            </button>
-                        </div>
+            <div class="modal__overlay init__overlay"></div>
+            <div class="modal__content init__content">
+                <h2>모든 내용을 새로 작성하시겠습니까?</h2>
+                <div class="init-row">
+                    <div>
+                        <button class="primary-button init__agree">
+                            확인
+                        </button>
+                    </div>
+                    <div>
+                        <button class="primary-button init__cancel">
+                            취소
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- 가입오류 모달 -->
+        <div class="modal hidden">
+            <div class="modal__overlay join__overlay"></div>
+            <div class="modal__content join__content">
+                <h2 style="text-align: center">부족한 항목을 입력해주세요.</h2>
+                <div class="init-row">
+                </div>
+                <div class="init-row">
+                    <div>
+                        <button class="primary-button join__agree">
+                            확인
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <footer>
         footer
@@ -184,8 +201,8 @@
 
     <!-- JS -->
     <script src="./util.js"></script>
-    <script src="./validation.js"></script>
-    <script src="./interest.js"></script>
+    <script src="./todo_join_validation.js"></script>
+    <script src="./todo_join_interest.js"></script>
     <script src="./todo_join_modal.js"></script>
     <script src="./todo_join_button.js"></script>
 

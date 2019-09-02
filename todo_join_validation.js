@@ -2,17 +2,32 @@
 const constant = {
     idMinLength: 5,
     passwordMinLength: 8,
+    
+    setState: function(state, caller){
+        caller.state = state
+    }
 }
 
 //Object Literal for Validation
 const validationForId = {
     minLength: constant.idMinLength,
+    state: "empty",
+    joinError: "아이디를 정확히 입력해주세요.",
 
     regExp: /[^a-z0-9\_\-]/,
     printMessage: {
-        empty: () => { messageUtil.addFailMessage("#id-message", message.emptyMessage); },
-        pass: () => { messageUtil.addPassMessage("#id-message", message.id.pass); },
-        fail: () => { messageUtil.addFailMessage("#id-message", message.id.fail); },
+        empty: () => { 
+            messageUtil.addFailMessage("#id-message", message.emptyMessage); 
+            constant.setState("empty", this)
+        },
+        pass: () => { 
+            messageUtil.addPassMessage("#id-message", message.id.pass); 
+            constant.setState("pass", this)
+        },
+        fail: () => {
+            messageUtil.addFailMessage("#id-message", message.id.fail); 
+            constant.setState("fail", this)
+        },
     },
 
     init(){
@@ -36,16 +51,30 @@ const validationForId = {
 
 const validationPassword = {
     minLength: constant.passwordMinLength,
+    state: "empty",
+    joinError: "비밀번호를 정확히 입력해주세요.",
 
     regExp_UpperCase: /[A-Z]/,
     regExp_Number: /[0-9]/,
     regExp_Special: /[^0-9a-zA-Z\n\t\s]/,
 
     printMessage: {
-        empty: () => { messageUtil.addFailMessage("#password-message", message.emptyMessage); },
-        pass: () => { messageUtil.addPassMessage("#password-message", message.password.pass); },
-        fail_length: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Length); },
-        fail_character: () => { messageUtil.addFailMessage("#password-message", message.password.fail_Character); }
+        empty: () => { 
+            messageUtil.addFailMessage("#password-message", message.emptyMessage); 
+            constant.setState("empty", this)
+        },
+        pass: () => { 
+            messageUtil.addPassMessage("#password-message", message.password.pass); 
+            constant.setState("pass", this)
+        },
+        fail_length: () => {
+            messageUtil.addFailMessage("#password-message", message.password.fail_Length);
+            constant.setState("fail", this)
+        },
+        fail_character: () => { 
+            messageUtil.addFailMessage("#password-message", message.password.fail_Character); 
+            constant.setState("fail", this)
+        }
     },
 
     init(){
@@ -76,10 +105,22 @@ const validationPassword = {
 }
 
 const validationPasswordReconfirm = {
+    state: "empty",
+    joinError: "비밀번호 재확인이 올바르지 않습니다.",
+    
     printMessage: {
-        empty: () => { messageUtil.addFailMessage("#password-reconfirm-message", message.emptyMessage); },
-        pass: () => { messageUtil.addPassMessage("#password-reconfirm-message", message.passwordReconfirm.pass); },
-        fail: () => { messageUtil.addFailMessage("#password-reconfirm-message", message.passwordReconfirm.fail); }
+        empty: () => { 
+            messageUtil.addFailMessage("#password-reconfirm-message", message.emptyMessage); 
+            constant.setState("empty", this)
+        },
+        pass: () => { 
+            messageUtil.addPassMessage("#password-reconfirm-message", message.passwordReconfirm.pass); 
+            constant.setState("pass", this)
+        },
+        fail: () => { 
+            messageUtil.addFailMessage("#password-reconfirm-message", message.passwordReconfirm.fail); 
+            constant.setState("fail", this)
+        }
     },
 
     init(){
@@ -100,12 +141,23 @@ const validationPasswordReconfirm = {
 
 const validationName = {
     messageNode: document.querySelector("#name-message"),
+    state: "empty",
+    joinError: "이름을 정확히 입력해주세요.",
     regExp: /[^a-zA-Z가-힣]/,
 
     printMessage: {
-        empty: () => { messageUtil.addFailMessage("#name-message", message.emptyMessage); },
-        pass: () => { messageUtil.addPassMessage("#name-message", message.name.pass); },
-        fail: () => { messageUtil.addFailMessage("#name-message", message.name.fail); }
+        empty: () => { 
+            messageUtil.addFailMessage("#name-message", message.emptyMessage); 
+            constant.setState("empty", this)
+        },
+        pass: () => { 
+            messageUtil.addPassMessage("#name-message", message.name.pass); 
+            constant.setState("pass", this)
+        },
+        fail: () => { 
+            messageUtil.addFailMessage("#name-message", message.name.fail); 
+            constant.setState("fail", this)
+        }
     },
 
     init(){
@@ -125,9 +177,17 @@ const validationName = {
 
 const validationGender = {
     messageNode: document.querySelector("#gender-message"),
+    state: "empty",
+    joinError: "성별을 정확히 입력해주세요.",
     printMessage: {
-        empty: (messageNode) => { messageUtil.showMessage(messageNode); },
-        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
+        empty: (messageNode) => { 
+            messageUtil.showMessage(messageNode); 
+            constant.setState("empty", this)
+        },
+        pass: (messageNode) => { 
+            messageUtil.hideMessage(messageNode); 
+            constant.setState("pass", this)
+        },
         fail: undefined,
     },
 
@@ -144,12 +204,20 @@ const validationGender = {
 
 const validationEmail = {
     messageNode: document.querySelector("#email-message"),
+    state: "empty",
+    joinError: "이메일을 정확히 입력해주세요.",
     regExp_Email: /^[\w\-]+@[a-zA-Z]+\.[a-zA-Z]{2,}/,
     
     printMessage: {
         empty: undefined,
-        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
-        fail: (messageNode) => { messageUtil.showMessage(messageNode); },
+        pass: (messageNode) => { 
+            messageUtil.hideMessage(messageNode); 
+            constant.setState("pass", this)
+        },
+        fail: (messageNode) => { 
+            messageUtil.showMessage(messageNode); 
+            constant.setState("fail", this)
+        },
     },
 
     init(){
@@ -169,13 +237,21 @@ const validationEmail = {
 
 const validationPhone = {
     messageNode: document.querySelector("#phone-message"),
+    state: "empty",
+    joinError: "전화번호를 정확히 입력해주세요.",
     regExp_10digit: /(010)(\d{3})(\d{4})/,
     regExp_11digit: /(010)(\d{4})(\d{4})/,
 
     printMessage: {
         empty: undefined,
-        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
-        fail: (messageNode) => { messageUtil.showMessage(messageNode); },
+        pass: (messageNode) => { 
+            messageUtil.hideMessage(messageNode); 
+            constant.setState("pass", this)
+        },
+        fail: (messageNode) => { 
+            messageUtil.showMessage(messageNode); 
+            constant.setState("fail", this)
+        },
     },
 
     init(){
@@ -197,14 +273,28 @@ const validationPhone = {
 
 const validationBirthDate = {
     messageNode: document.querySelector("#birthdate-message"),
+    state: "empty",
+    joinError: "생년월일을 정확히 입력해주세요.",
     regExp_Year: /\d{4}/,
 
     printMessage: {
         empty: undefined,
-        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
-        fail_range: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.range); },
-        fail_invalid: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.invalid); },
-        fail_day: () => { messageUtil.addFailMessage("#birthdate-message", message.birthDate.day); }
+        pass: (messageNode) => { 
+            messageUtil.hideMessage(messageNode); 
+            constant.setState("pass", this)
+        },
+        fail_range: () => { 
+            messageUtil.addFailMessage("#birthdate-message", message.birthDate.range); 
+            constant.setState("fail", this)
+        },
+        fail_invalid: () => { 
+            messageUtil.addFailMessage("#birthdate-message", message.birthDate.invalid); 
+            constant.setState("fail", this)
+        },
+        fail_day: () => { 
+            messageUtil.addFailMessage("#birthdate-message", message.birthDate.day); 
+            constant.setState("fail", this)
+        }
     },
 
     getInputArray(nodeArray){
@@ -254,12 +344,20 @@ const validationBirthDate = {
 
 const validationInterest = {
     messageNode: document.querySelector("#interest-message"),
+    state: "empty",
+    joinError: "관심사를 정확히 입력해주세요.",
     minimun: 3,
 
     printMessage: {
         empty: undefined,
-        pass: (messageNode) => { messageUtil.hideMessage(messageNode); },
-        fail: (messageNode) => { messageUtil.showMessage(messageNode); },
+        pass: (messageNode) => { 
+            messageUtil.hideMessage(messageNode); 
+            constant.setState("pass", this)
+        },
+        fail: (messageNode) => { 
+            messageUtil.showMessage(messageNode); 
+            constant.setState("fail", this)
+        },
     },
 
     init(){
@@ -275,6 +373,12 @@ const validationInterest = {
     }
 }
 
+const validationList = [
+    validationForId, validationPassword, validationPasswordReconfirm,
+    validationName, validationBirthDate, validationGender,
+    validationEmail, validationPhone, validationInterest
+]
+
 validationForId.init();
 validationPassword.init();
 validationPasswordReconfirm.init();
@@ -284,4 +388,3 @@ validationGender.init();
 validationEmail.init();
 validationPhone.init();
 validationInterest.init();
-//term.init();

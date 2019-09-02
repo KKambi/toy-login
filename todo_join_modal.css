@@ -101,3 +101,9 @@ https://gist.github.com/serranoarevalo/9f1f795e49c1ea1b020ca5af05813b0b
 .init__content .primary-button{
     width: 150px;
 }
+
+.join__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
