@@ -11,6 +11,20 @@ const tags = {
             dom_util.removeClass(wrapper, "focus")
         })
     },
+    addAutoChangeSize: function(input = this.input){
+        input.addEventListener('keyup', function(keyEvent){
+            if (keyEvent.key === ',') return;
+            let length = input.value.length
+            input.setAttribute("size", `${length}`)
+        })
+    },
+    addClose: function(aNode){
+        aNode.addEventListener('click', function(){
+            let spanNode = aNode.parentElement
+            spanNode.parentNode.removeChild(spanNode)
+        })
+    },
+
     addTag: function (tagString, input = this.input, wrapper = this.wrapper) {
         if (tagString.length === 0) return;
 
@@ -21,18 +35,14 @@ const tags = {
         
         const aNode = document.createElement('a')
         const x = document.createTextNode('x')
+        this.addClose(aNode)
         aNode.appendChild(x)
         spanNode.appendChild(aNode)
         
         wrapper.insertBefore(spanNode, input)
     },
-
-    addAutoChangeSize: function(input = this.input){
-        input.addEventListener('keyup', function(keyEvent){
-            if (keyEvent.key === ',') return;
-            let length = input.value.length
-            input.setAttribute("size", `${length}`)
-        })
+    removeTag: function(input = this.input, wrapper = this.wrapper){
+        
     },
 
     initInput: function (input = this.input) {
