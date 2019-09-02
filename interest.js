@@ -2,6 +2,7 @@ const tags = {
     input: document.querySelector("#interest"),
     wrapper: document.querySelector(".interest-input-wrapper"),
     defaultSize: 1,
+    tagList: [],
 
     addFocus: function(wrapper=this.wrapper){
         wrapper.addEventListener("click", function(){
@@ -18,16 +19,16 @@ const tags = {
             input.setAttribute("size", `${length}`)
         })
     },
-    addClose: function(aNode){
+    addClose: function(aNode, removeTag = this.removeTag, tagList = this.tagList){
         aNode.addEventListener('click', function(){
             let spanNode = aNode.parentElement
+            removeTag(tagList, spanNode.innerText)
             spanNode.parentNode.removeChild(spanNode)
         })
     },
-
     addTag: function (tagString, input = this.input, wrapper = this.wrapper) {
         if (tagString.length === 0) return;
-
+        
         const spanNode = document.createElement('span')
         const textNode = document.createTextNode(tagString)
         spanNode.appendChild(textNode)
@@ -39,12 +40,15 @@ const tags = {
         aNode.appendChild(x)
         spanNode.appendChild(aNode)
         
+        this.tagList.push(tagString)
         wrapper.insertBefore(spanNode, input)
     },
-    removeTag: function(input = this.input, wrapper = this.wrapper){
-        
+    removeTag: function(tagList, tagString){
+        let tagIndex = tagList.indexOf(tagString)
+        tagList.splice(tagIndex, 1)
+        console.log(tagList)
     },
-
+    
     initInput: function (input = this.input) {
         input.value = ""
     },
