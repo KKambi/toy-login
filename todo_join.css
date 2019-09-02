@@ -154,29 +154,31 @@ https://www.cssscript.com/tags-input-tagplug/
 .interest-input-wrapper{
     padding: 0;
     background: #ffffff;
+    height: auto;
 }
 
 #interest {
-    width:100%;
-    height: 100%;
     box-sizing: border-box;
     border: none;
     outline: none;
     background: transparent;
+    width: auto;
+    max-width: 100%;
 }
 
 .interest-input-wrapper .tag {
     display: inline-block;
-    background-color: #009432;
-    color: white;
-    border-radius: 40px;
-    padding: 0px 3px 0px 7px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    border: .1rem solid #BBBBBB;
+    color: #666666;
+    background-color: var(--body-background-color);
+    border-radius: 10px;
+    padding: 5px 3px 5px 10px;
+    margin-left: .5rem;
+    margin-top: 1rem;
 }
 
 .interest-input-wrapper .tag a {
-    margin: 0 7px 3px;
+    margin: 0 10px 3px;
     display: inline-block;
     cursor: pointer;
 }

@@ -10,26 +10,42 @@ const tags = {
             dom_util.removeClass(wrapper, "focus")
         })
     },
-
     addTag: function (tagString, input = this.input, wrapper = this.wrapper) {
+        if (tagString.length === 0) return;
+
         const spanNode = document.createElement('span')
         const textNode = document.createTextNode(tagString)
         spanNode.appendChild(textNode)
-
+        spanNode.setAttribute("class", "tag")
+        
+        const aNode = document.createElement('a')
+        const x = document.createTextNode('x')
+        aNode.appendChild(x)
+        spanNode.appendChild(aNode)
+        
         wrapper.insertBefore(spanNode, input)
+    },
+
+    addAutoChangeSize: function(input = this.input){
+        input.addEventListener('keydown', function(){
+            let length = input.value.length
+            input.setAttribute("size", `${length+1}`)
+        })
     },
 
     initInput: function (input = this.input) {
         input.value = ""
+        console.log(input)
     }
 }
 
 const interest = {
     init() {
         const txtNode = document.querySelector("#interest")
-        txtNode.addEventListener("keydown", (inputChar) => {
+        txtNode.addEventListener("keyup", (inputChar) => {
             let exceptionKey = ["Backspace", "Delete", ","]
             let tagString = tags.input.value.trim()
+            tagString = tagString.slice(0, -1)
             let currentKey = inputChar.key
 
             //쉼표일 때
@@ -46,4 +62,5 @@ const interest = {
 }
 
 tags.addFocus();
+tags.addAutoChangeSize();
 interest.init();

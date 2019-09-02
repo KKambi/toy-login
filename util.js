@@ -13,6 +13,7 @@ const dom_util = {
         }.bind(caller))
     },
 
+    //addClass & removeClass 출처: https://unikys.tistory.com/301
     addClass(element, className){
         let check = new RegExp("(\\s|^)" + className + "(\\s|$)");
         if (check.test(element.className) === false) { 
@@ -22,7 +23,6 @@ const dom_util = {
     },
     removeClass(element, className){
         let check = new RegExp("(\\s|^)" + className + "(\\s|$)"); 
-        console.log(check)
         if (check.test(element.className) === true) { 
             element.className = element.className.replace(check, " ").trim();
         }
