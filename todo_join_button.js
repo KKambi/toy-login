@@ -56,6 +56,7 @@ const joinButton = {
 
         //check input
         validationList.forEach((validationObject) => {
+            console.log(validationObject)
             if(validationObject.state !== "pass") errorList.push(validationObject.joinError)
         })
         
@@ -69,7 +70,7 @@ const joinButton = {
         }
         else{
             /*
-            가입하기 버튼을 클릭했을 때, 모든 항목이 입력된 상태라면 
+            TODO: 가입하기 버튼을 클릭했을 때, 모든 항목이 입력된 상태라면 
             모든 내용이 비동기로 서버로 보내지고 결과를 받은 후 자동로그인이 된다.
             자동로그인이 된 상태로 메인화면으로 이동된다.
             */

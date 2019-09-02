@@ -18,15 +18,15 @@ const validationForId = {
     printMessage: {
         empty: () => { 
             messageUtil.addFailMessage("#id-message", message.emptyMessage); 
-            constant.setState("empty", this)
+            constant.setState("empty", validationForId)
         },
         pass: () => { 
             messageUtil.addPassMessage("#id-message", message.id.pass); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationForId)
         },
         fail: () => {
             messageUtil.addFailMessage("#id-message", message.id.fail); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationForId)
         },
     },
 
@@ -61,19 +61,19 @@ const validationPassword = {
     printMessage: {
         empty: () => { 
             messageUtil.addFailMessage("#password-message", message.emptyMessage); 
-            constant.setState("empty", this)
+            constant.setState("empty", validationPassword)
         },
         pass: () => { 
             messageUtil.addPassMessage("#password-message", message.password.pass); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationPassword)
         },
         fail_length: () => {
             messageUtil.addFailMessage("#password-message", message.password.fail_Length);
-            constant.setState("fail", this)
+            constant.setState("fail", validationPassword)
         },
         fail_character: () => { 
             messageUtil.addFailMessage("#password-message", message.password.fail_Character); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationPassword)
         }
     },
 
@@ -111,15 +111,15 @@ const validationPasswordReconfirm = {
     printMessage: {
         empty: () => { 
             messageUtil.addFailMessage("#password-reconfirm-message", message.emptyMessage); 
-            constant.setState("empty", this)
+            constant.setState("empty", validationPasswordReconfirm)
         },
         pass: () => { 
             messageUtil.addPassMessage("#password-reconfirm-message", message.passwordReconfirm.pass); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationPasswordReconfirm)
         },
         fail: () => { 
             messageUtil.addFailMessage("#password-reconfirm-message", message.passwordReconfirm.fail); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationPasswordReconfirm)
         }
     },
 
@@ -148,15 +148,15 @@ const validationName = {
     printMessage: {
         empty: () => { 
             messageUtil.addFailMessage("#name-message", message.emptyMessage); 
-            constant.setState("empty", this)
+            constant.setState("empty", validationName)
         },
         pass: () => { 
             messageUtil.addPassMessage("#name-message", message.name.pass); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationName)
         },
         fail: () => { 
             messageUtil.addFailMessage("#name-message", message.name.fail); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationName)
         }
     },
 
@@ -182,11 +182,11 @@ const validationGender = {
     printMessage: {
         empty: (messageNode) => { 
             messageUtil.showMessage(messageNode); 
-            constant.setState("empty", this)
+            constant.setState("empty", validationGender)
         },
         pass: (messageNode) => { 
             messageUtil.hideMessage(messageNode); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationGender)
         },
         fail: undefined,
     },
@@ -210,19 +210,19 @@ const validationEmail = {
     
     printMessage: {
         empty: undefined,
-        pass: (messageNode) => { 
+        pass: function(messageNode){ 
             messageUtil.hideMessage(messageNode); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationEmail)
         },
         fail: (messageNode) => { 
             messageUtil.showMessage(messageNode); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationEmail)
         },
     },
 
     init(){
         let inputForEmail = document.querySelector("#email");
-        dom_util.registerBlurEvent(inputForEmail, this);
+        dom_util.registerBlurEvent(inputForEmail, validationEmail);
     },
 
     hasValidForm(email) {
@@ -246,11 +246,11 @@ const validationPhone = {
         empty: undefined,
         pass: (messageNode) => { 
             messageUtil.hideMessage(messageNode); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationPhone)
         },
         fail: (messageNode) => { 
             messageUtil.showMessage(messageNode); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationPhone)
         },
     },
 
@@ -281,19 +281,19 @@ const validationBirthDate = {
         empty: undefined,
         pass: (messageNode) => { 
             messageUtil.hideMessage(messageNode); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationBirthDate)
         },
         fail_range: () => { 
             messageUtil.addFailMessage("#birthdate-message", message.birthDate.range); 
-            constant.setState("fail", this)
+            constant.setState("fail", thivalidationBirthDates)
         },
         fail_invalid: () => { 
             messageUtil.addFailMessage("#birthdate-message", message.birthDate.invalid); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationBirthDate)
         },
         fail_day: () => { 
             messageUtil.addFailMessage("#birthdate-message", message.birthDate.day); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationBirthDate)
         }
     },
 
@@ -352,11 +352,11 @@ const validationInterest = {
         empty: undefined,
         pass: (messageNode) => { 
             messageUtil.hideMessage(messageNode); 
-            constant.setState("pass", this)
+            constant.setState("pass", validationInterest)
         },
         fail: (messageNode) => { 
             messageUtil.showMessage(messageNode); 
-            constant.setState("fail", this)
+            constant.setState("fail", validationInterest)
         },
     },
 
