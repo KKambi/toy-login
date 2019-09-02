@@ -1,25 +1,49 @@
-const interest = {
+const tags = {
+    input: document.querySelector("#interest"),
+    wrapper: document.querySelector(".interest-input-wrapper"),
 
-    init(){
-        const txtareaNode = document.querySelector("#interest")
-        txtareaNode.addEventListener("keydown", (pressEvent) => {
-            const inputCharacter = pressEvent.key;
-            
-            //줄이 변경될 때마다 15px씩 늘리면 됨
-            let text = txtareaNode.value;
-            let previousHeight = txtareaNode.offsetHeight;
-            let newDom = document.createElement('textarea');
-            newDom.setAttribute('name', 'interest');
-            newDom.setAttribute('id', 'interest');
-            newDom.setAttribute('class', 'txtarea');
-            //실제 코드에는 상위돔에 집어넣어주세요.
-        
-            // var inputWidth =  $('#virtual_dom').width() + 10; // 글자 하나의 대략적인 크기 
-        
-            // $(input).css('width', inputWidth); 
-            // $('#virtual_dom').remove();
+    addFocus: function(wrapper=this.wrapper){
+        wrapper.addEventListener("click", function(){
+            dom_util.addClass(wrapper, "focus")
+        })
+        wrapper.addEventListener("focusout", function(){
+            dom_util.removeClass(wrapper, "focus")
+        })
+    },
+
+    addTag: function (tagString, input = this.input, wrapper = this.wrapper) {
+        const spanNode = document.createElement('span')
+        const textNode = document.createTextNode(tagString)
+        spanNode.appendChild(textNode)
+
+        wrapper.insertBefore(spanNode, input)
+    },
+
+    initInput: function (input = this.input) {
+        input.value = ""
+    }
+}
+
+const interest = {
+    init() {
+        const txtNode = document.querySelector("#interest")
+        txtNode.addEventListener("keydown", (inputChar) => {
+            let exceptionKey = ["Backspace", "Delete", ","]
+            let tagString = tags.input.value.trim()
+            let currentKey = inputChar.key
+
+            //쉼표일 때
+            if (exceptionKey.indexOf(currentKey) === 2) {
+                tags.addTag(tagString)
+                tags.initInput()
+            }
+            //백스페이스, 딜리트일 때
+            else {
+                //TODO: 태그 마지막 글자를 지우고 input에 나머지를 채우는 행동
+            }
         })
     }
 }
 
+tags.addFocus();
 interest.init();

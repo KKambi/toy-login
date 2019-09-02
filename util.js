@@ -11,6 +11,21 @@ const dom_util = {
             let messageType = this.validateInput(inputValue)
             this.printMessage[messageType](this.messageNode);
         }.bind(caller))
+    },
+
+    addClass(element, className){
+        let check = new RegExp("(\\s|^)" + className + "(\\s|$)");
+        if (check.test(element.className) === false) { 
+            element.className += " " + className; 
+        }
+
+    },
+    removeClass(element, className){
+        let check = new RegExp("(\\s|^)" + className + "(\\s|$)"); 
+        console.log(check)
+        if (check.test(element.className) === true) { 
+            element.className = element.className.replace(check, " ").trim();
+        }
     }
 }
 
