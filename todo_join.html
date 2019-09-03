@@ -25,28 +25,28 @@
                         <h3 class="join-title">
                             아이디
                         </h3>
-                        <input id="id" name="id" type="text" maxlength="20">
+                        <input id="id" name="id" type="text" maxlength="20" aria-label="ID">
                         <span id="id-message" style="display: none;"></span>
                     </div>
                     <div class="join-row">
                         <h3 class="join-title">
                             비밀번호
                         </h3>
-                        <input id="password" name="password" type="password" maxlength="16">
+                        <input id="password" name="password" type="password" maxlength="16" aria-label="Password">
                         <span id="password-message" style="display: none;"></span>
                     </div>
                     <div class="join-row">
                         <h3 class="join-title">
                             비밀번호 재확인
                         </h3>
-                        <input id="password-reconfirm" name="password-reconfirm" type="password" maxlength="16">
+                        <input id="password-reconfirm" name="password-reconfirm" type="password" maxlength="16" aria-label="Password-reconfirm">
                         <span id="password-reconfirm-message" style="display: none;"></span>
                     </div>
                     <div class="join-row">
                         <h3 class="join-title">
                             이름
                         </h3>
-                        <input id="name" name="name" type="text" maxlength="20">
+                        <input id="name" name="name" type="text" maxlength="20" aria-label="Name">
                         <span id="name-message" style="display: none;"></span>
                     </div>
                     <div class="join-row">
@@ -55,10 +55,10 @@
                         </h3>
                         <div class="birthdate-wrapper">
                             <span class="birthdate-yy">
-                                <input id="yy" name="yy" type="text" placeholder="년(4자)" maxlength="4">
+                                <input id="yy" name="yy" type="text" placeholder="년(4자)" maxlength="4" aria-label="Birthdate-Year">
                             </span>
                             <span class="birthdate-mm">
-                                <select id="mm" name="mm" class="sel" aria-label="월">
+                                <select id="mm" name="mm" class="sel" aria-label="월" aria-label="Birthdate-Month">
                                     <option value="" selected="">월</option>
                                     <option value="01">1</option>
                                     <option value="02">2</option>
@@ -75,7 +75,7 @@
                                 </select>
                             </span>
                             <span class="birthdate-dd">
-                                <input id="dd" name="dd" type="text" placeholder="일">
+                                <input id="dd" name="dd" type="text" placeholder="일" aria-label="Birthdate-Day">
                             </span>
                         </div>
                         <span id="birthdate-message" class="message fail" style="display: none;"></span>
@@ -84,7 +84,7 @@
                         <h3 class="join-title">
                             성별
                         </h3>
-                        <select id="gender" name="gender" class="sel" aria-label="성별">
+                        <select id="gender" name="gender" class="sel" aria-label="Gender">
                             <option value="" selected="">성별</option>
                             <option value="male">남자</option>
                             <option value="female">여자</option>
@@ -95,14 +95,14 @@
                         <h3 class="join-title">
                             이메일
                         </h3>
-                        <input id="email" type="text">
+                        <input id="email" type="text" aria-label="Email">
                         <span id="email-message" class="message fail" style="display: none;">이메일 주소를 다시 확인해주세요.</span>
                     </div>
                     <div class="join-row">
                         <h3 class="join-title">
                             휴대전화
                         </h3>
-                        <input id="phone" type="text" placeholder="- 없이 입력해주세요. 예) 0101231234">
+                        <input id="phone" type="text" placeholder="- 없이 입력해주세요. 예) 0101231234" aria-label="Phone-number">
                         <span id="phone-message" class="message fail" style="display: none;">형식에 맞지 않는 번호입니다.</span>
                     </div>
                     <div class="join-row">
@@ -110,12 +110,12 @@
                             관심사
                         </h3>
                         <div class="interest-input-wrapper">
-                            <input type="text" name="interest" id="interest">
+                            <input type="text" name="interest" id="interest" aria-label="Interest">
                         </div>
                         <span id="interest-message" class="message fail" style="display: none;">3개 이상의 관심사를 입력하세요.</span>
                     </div>
                     <div class="term-area">
-                        <span class="join-title underline">
+                        <span class="join-title underline" aria-label="Open-term">
                             약관에 동의합니다.
                         </span>
                         <span class="term-box">
@@ -124,12 +124,12 @@
                     </div>
                     <div class="button-area">
                         <span class="button-initialize">
-                            <button class="primary-button" id="initialization-button">
+                            <button class="primary-button" id="initialization-button" aria-label="Initialization">
                                 초기화
                             </button>
                         </span>
                         <span class="button-join">
-                            <button class="primary-button" id="join-button">
+                            <button class="primary-button" id="join-button" aria-label="Join">
                                 가입하기
                             </button>
                         </span>
@@ -147,11 +147,11 @@
                 </div>
                 <div class="modal-row">개인정보 수집 및 이용에 대한 안내</div>
                 <div class="modal-row">
-                    <div id="modal__term">
+                    <div id="modal__term" aria-label="Term">
                     </div>
                 </div>
                 <div class="modal-row">
-                    <button class="primary-button term-button">
+                    <button class="primary-button term-button" aria-label="Term-agree">
                         동의
                     </button>
                 </div>
@@ -165,12 +165,12 @@
                 <h2>모든 내용을 새로 작성하시겠습니까?</h2>
                 <div class="init-row">
                     <div>
-                        <button class="primary-button init__agree">
+                        <button class="primary-button init__agree" aria-label="Initialization-agree">
                             확인
                         </button>
                     </div>
                     <div>
-                        <button class="primary-button init__cancel">
+                        <button class="primary-button init__cancel" aria-label="Initialization-cancel">
                             취소
                         </button>
                     </div>
@@ -183,11 +183,11 @@
             <div class="modal__overlay join__overlay"></div>
             <div class="modal__content join__content">
                 <h2 style="text-align: center">가입 오류</h2>
-                <div class="init-row">
+                <div class="init-row" aria-label="Join-error-list">
                 </div>
                 <div class="init-row">
                     <div>
-                        <button class="primary-button join__agree">
+                        <button class="primary-button join__agree" aria-label="Join-error-check">
                             확인
                         </button>
                     </div>
