@@ -20,6 +20,11 @@
   font-size: 1.5rem;
 }
 
+.input-group input:focus{
+  border-color: #08A600;
+  box-shadow: none;
+}
+
 #login-button{
   font-size: 1.5rem;
 }
