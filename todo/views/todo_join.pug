@@ -1,0 +1,137 @@
+doctype html
+head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/reset.css')
+  link(rel='stylesheet' type='text/css' href='/stylesheets/todo_join.css')
+  link(rel='stylesheet' type='text/css' href='/stylesheets/todo_join_modal.css')
+  link(href='https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap' rel='stylesheet')
+  title todo
+  meta(charset='UTF-8')
+header
+  h1.header-title
+    | 회원가입
+section
+  // 회원가입 폼
+  form.join_form(action='?' method='POST')
+    .wrapper
+      .join-content
+        .join-row
+          h3.join-title
+            | 아이디
+          input#id(name='id' type='text' maxlength='20' aria-label='ID')
+          span#id-message(style='display: none;')
+        .join-row
+          h3.join-title
+            | 비밀번호
+          input#password(name='password' type='password' maxlength='16' aria-label='Password')
+          span#password-message(style='display: none;')
+        .join-row
+          h3.join-title
+            | 비밀번호 재확인
+          input#password-reconfirm(name='password-reconfirm' type='password' maxlength='16' aria-label='Password-reconfirm')
+          span#password-reconfirm-message(style='display: none;')
+        .join-row
+          h3.join-title
+            | 이름
+          input#name(name='name' type='text' maxlength='20' aria-label='Name')
+          span#name-message(style='display: none;')
+        .join-row
+          h3.join-title
+            | 생년월일
+          .birthdate-wrapper
+            span.birthdate-yy
+              input#yy(name='yy' type='text' placeholder='년(4자)' maxlength='4' aria-label='Birthdate-Year')
+            span.birthdate-mm
+              select#mm.sel(name='mm' aria-label='월')
+                option(value='' selected='') 월
+                option(value='01') 1
+                option(value='02') 2
+                option(value='03') 3
+                option(value='04') 4
+                option(value='05') 5
+                option(value='06') 6
+                option(value='07') 7
+                option(value='08') 8
+                option(value='09') 9
+                option(value='10') 10
+                option(value='11') 11
+                option(value='12') 12
+            span.birthdate-dd
+              input#dd(name='dd' type='text' placeholder='일' aria-label='Birthdate-Day')
+          span#birthdate-message.message.fail(style='display: none;')
+        .join-row
+          h3.join-title
+            | 성별
+          select#gender.sel(name='gender' aria-label='Gender')
+            option(value='' selected='') 성별
+            option(value='male') 남자
+            option(value='female') 여자
+          span#gender-message.message.fail(style='display: none;') 필수 정보입니다.
+        .join-row
+          h3.join-title
+            | 이메일
+          input#email(type='text' aria-label='Email')
+          span#email-message.message.fail(style='display: none;') 이메일 주소를 다시 확인해주세요.
+        .join-row
+          h3.join-title
+            | 휴대전화
+          input#phone(type='text' placeholder='- 없이 입력해주세요. 예) 0101231234' aria-label='Phone-number')
+          span#phone-message.message.fail(style='display: none;') 형식에 맞지 않는 번호입니다.
+        .join-row
+          h3.join-title
+            | 관심사
+          .interest-input-wrapper
+            input#interest(type='text' name='interest' aria-label='Interest')
+          span#interest-message.message.fail(style='display: none;') 3개 이상의 관심사를 입력하세요.
+        .term-area
+          span.join-title.underline(aria-label='Open-term')
+            | 약관에 동의합니다.
+          span.term-box
+            input#term-box__checkbox(type='checkbox' name='term' disabled='')
+        .button-area
+          span.button-initialize
+            button#initialization-button.primary-button(aria-label='Initialization')
+              | 초기화
+          span.button-join
+            button#join-button.primary-button(aria-label='Join')
+              | 가입하기
+  // 약관모달
+  .modal.hidden
+    .modal__overlay
+    .modal__content
+      .modal-row
+        a X
+      .modal-row 개인정보 수집 및 이용에 대한 안내
+      .modal-row
+        #modal__term(aria-label='Term')
+      .modal-row
+        button.primary-button.term-button(aria-label='Term-agree')
+          | 동의
+  // 초기화모달
+  .modal.hidden
+    .modal__overlay.init__overlay
+    .modal__content.init__content
+      h2 모든 내용을 새로 작성하시겠습니까?
+      .init-row
+        div
+          button.primary-button.init__agree(aria-label='Initialization-agree')
+            | 확인
+        div
+          button.primary-button.init__cancel(aria-label='Initialization-cancel')
+            | 취소
+  // 가입오류 모달
+  .modal.hidden
+    .modal__overlay.join__overlay
+    .modal__content.join__content
+      h2(style='text-align: center') 가입 오류
+      .init-row(aria-label='Join-error-list')
+      .init-row
+        div
+          button.primary-button.join__agree(aria-label='Join-error-check')
+            | 확인
+footer
+// JS
+script(src='/javascripts/util.js')
+script(src='/javascripts/todo_join_validation.js')
+script(src='/javascripts/todo_join_interest.js')
+script(src='/javascripts/todo_join_modal.js')
+script(src='/javascripts/todo_join_button.js')
