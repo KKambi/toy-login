@@ -10,7 +10,7 @@ const indexPath = "../"
 const { checkIdDuplication, addUserInfo } = require('../public/javascripts/server_join.js')
 
 router.get('/new', function(req, res, next) {
-  res.render('todo_join');
+  res.render('todo_login');
 });
 
 router.post('/create', function(req, res, next){
