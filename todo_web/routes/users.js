@@ -6,8 +6,8 @@ var router = express.Router();
 /* constant variable */
 const { INDEX_PATH, MIN_30_TO_MS } = require('../public/javascripts/constant.js')
 
-/* api function */
-const { addUser } = require('../public/javascripts/Model/Users.js')
+/* import module */
+const Users = require('../public/javascripts/Model/Users.js')
 
 // GET to join page
 router.get('/new', function(req, res, next) {
@@ -16,7 +16,7 @@ router.get('/new', function(req, res, next) {
 
 // POST for join
 router.post('/create', function(req, res, next){
-  addUser(req.body)
+  Users.addUser(req.body)
   res.redirect(INDEX_PATH)
 })
 

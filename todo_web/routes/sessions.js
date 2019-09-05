@@ -25,7 +25,7 @@ router.post('/create', function (req, res, next) {
         const name = Users.getName(id)
         const uuid = createUniqueId()
 
-        Sessions.addSession(id, uuid, name)
+        Sessions.addSession(uuid, id, name)
 
         res.cookie('sessionId', uuid, { maxAge: MIN_30_TO_MS })
         res.redirect(INDEX_PATH)
