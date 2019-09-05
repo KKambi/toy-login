@@ -1,4 +1,4 @@
-/* import */
+/* import library */
 var express = require('express');
 var createError = require('http-errors');
 var router = express.Router();
@@ -6,8 +6,10 @@ var router = express.Router();
 /* constant variable */
 const indexPath = "../"
 
-/* api function */
-const { isRegistered, isCorrectPassword } = require('../public/javascripts/server_join.js')
+/* import module */
+const Users = require('../public/javascripts/Model/Users.js')
+const { createUniqueId } = require('../public/javascripts/uuid_util.js')
+const { sessionTable } = require('../DB/session.js')
 
 router.get('/new', function (req, res, next) {
     res.render('todo_login');
@@ -16,10 +18,18 @@ router.get('/new', function (req, res, next) {
 router.post('/create', function (req, res, next) {
     const id = req.body.id
     const password = req.body.password
-    if (isRegistered(id) && isCorrectPassword(id, password)){
-        //TODO: 세션이 유지된 채, 메인페이지로 리다이렉트
+
+    if (Users.isRegistered(id) && Users.isCorrectPassword(id, password)){
+        const userName = Users.getName(id)
+        const uuid = createUniqueId()
+        sessionTable[id] = {
+            sessionId: uuid,
+            name: userName
+        }
+        res.cookie('sessionId', uuid)
         res.redirect(indexPath)
     }
+    
     //TODO: 입력정보가 틀렸으므로, 다시 로그인하도록 유도
     res.redirect('./new')
 })

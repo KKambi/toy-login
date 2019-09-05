@@ -7,7 +7,7 @@ var router = express.Router();
 const indexPath = "../"
 
 /* api function */
-const { addUser } = require('../public/javascripts/server_join.js')
+const { addUser } = require('../public/javascripts/Model/Users.js')
 
 router.get('/new', function(req, res, next) {
   res.render('todo_join');

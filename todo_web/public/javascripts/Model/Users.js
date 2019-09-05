@@ -1,4 +1,4 @@
-let { userTable } = require('../../DB/user.js')
+let { userTable } = require('../../../DB/user.js')
 
 /**
  * Check if two params same
@@ -42,8 +42,13 @@ const addUser = function(userJson){
     console.log(userTable)
 }
 
+const getName = function(id){
+    return userTable[id].name
+}
+
 module.exports = {
     addUser,
     isRegistered,
-    isCorrectPassword
+    isCorrectPassword,
+    getName
 }
