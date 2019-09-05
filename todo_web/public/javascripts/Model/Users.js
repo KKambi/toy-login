@@ -1,4 +1,4 @@
-let { userTable } = require('../../../DB/user.js')
+let { userTable } = require('../../../DB/User.js')
 
 /**
  * Check if two params same
