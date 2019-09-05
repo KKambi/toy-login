@@ -7,19 +7,14 @@ var router = express.Router();
 const indexPath = "../"
 
 /* api function */
-const { checkIdDuplication, addUserInfo } = require('../public/javascripts/server_join.js')
+const { addUser } = require('../public/javascripts/server_join.js')
 
 router.get('/new', function(req, res, next) {
   res.render('todo_join');
 });
 
 router.post('/create', function(req, res, next){
-  try {
-    checkIdDuplication(req.body.id)
-  } catch (e) {
-    next(createError(e))
-  }
-  addUserInfo(req.body)
+  addUser(req.body)
   res.redirect(indexPath)
 })
 

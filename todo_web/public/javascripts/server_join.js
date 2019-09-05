@@ -1,28 +1,31 @@
-let { userInfo } = require('../../DB/user.js')
+let { userTable } = require('../../DB/user.js')
 
 /**
  * Check if two params same
  *
  * @param {string} newId id of request from join
- * @param {string} existentId id from userInfo
+ * @param {string} existentId id from userTable
  * @return {boolean} 
  */
-const isIdSame = function(newId, existentId){
+const isSame = function(newId, existentId){
     return newId === existentId 
 }
 
 /**
- * Check duplication of new user id in userInfo
+ * Check duplication of new user id in userTable
  *
  * @param {string} id id of request from join
- * @return {} 
+ * @return {boolean} 
  */
-const checkIdDuplication = function(id){
-    let ids = Object.keys(userInfo)
-    let result = ids.some((existentId) => {
-        return isIdSame(id, existentId)
-    })
-    if (result === true) throw new Error('중복된 아이디입니다.')
+const isRegistered = function(id){
+    let ids = Object.keys(userTable)
+    return ids.some((existentId) => {
+        return isSame(id, existentId)
+    }) 
+}
+
+const isCorrectPassword = function(id, password){
+    return userTable[id].password === password
 }
 
 /**
@@ -31,15 +34,16 @@ const checkIdDuplication = function(id){
  * @param {obejct} userJson body of request from join
  * @return {} 
  */
-const addUserInfo = function(userJson){
+const addUser = function(userJson){
     let id = userJson.id
     delete userJson.id
 
-    userInfo[id] = userJson
-    console.log(userInfo)
+    userTable[id] = userJson
+    console.log(userTable)
 }
 
 module.exports = {
-    addUserInfo,
-    checkIdDuplication
+    addUser,
+    isRegistered,
+    isCorrectPassword
 }
