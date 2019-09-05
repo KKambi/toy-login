@@ -69,6 +69,8 @@ const joinButton = {
             this.openModal(errorList)
         }
         else{
+            let interestInput = document.querySelector("#interest")
+            interestInput.value = JSON.stringify(tags.tagList)
             let form = document.querySelector(".join_form")
             async_util.submitAfter0Seconds(form)
         }

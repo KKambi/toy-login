@@ -11,7 +11,7 @@ header
     | 회원가입
 section
   // 회원가입 폼
-  form.join_form(action='?' method='POST')
+  form.join_form(action='./create' method='POST')
     .wrapper
       .join-content
         .join-row
@@ -69,12 +69,12 @@ section
         .join-row
           h3.join-title
             | 이메일
-          input#email(type='text' aria-label='Email')
+          input#email(name='email' type='text' aria-label='Email')
           span#email-message.message.fail(style='display: none;') 이메일 주소를 다시 확인해주세요.
         .join-row
           h3.join-title
             | 휴대전화
-          input#phone(type='text' placeholder='- 없이 입력해주세요. 예) 0101231234' aria-label='Phone-number')
+          input#phone(name='phone' type='text' placeholder='- 없이 입력해주세요. 예) 0101231234' aria-label='Phone-number')
           span#phone-message.message.fail(style='display: none;') 형식에 맞지 않는 번호입니다.
         .join-row
           h3.join-title
