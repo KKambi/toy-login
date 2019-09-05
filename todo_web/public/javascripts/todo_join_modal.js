@@ -53,7 +53,6 @@ const term = {
     addOpenEvent: function(){
         document.querySelector("span.join-title").addEventListener("click", () => {
             document.querySelector(".modal__overlay").parentNode.setAttribute("class", "modal")
-            document.querySelector("body").style.overflow = "hidden"
         })
     },
     addCloseEvent: function(){
@@ -68,7 +67,6 @@ const term = {
         
         document.querySelector(".modal-row a").addEventListener("click", () => {
             document.querySelector(".modal__overlay").parentNode.setAttribute("class", "modal hidden")
-            document.querySelector("body").style.overflow = "visible"
         })
     },
     addScrollEvent: function(){

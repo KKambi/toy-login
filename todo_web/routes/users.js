@@ -1,6 +1,7 @@
 var express = require('express');
+var createError = require('http-errors');
 var router = express.Router();
-// let bodyParser = require('body-parser')
+const { checkIdDuplication, addUserInfo } = require('../public/javascripts/server_join.js')
 
 /* GET users listing. */
 router.get('/join', function(req, res, next) {
@@ -8,7 +9,12 @@ router.get('/join', function(req, res, next) {
 });
 
 router.post('/create', function(req, res, next){
-  console.log(req.body)
+  try {
+    checkIdDuplication(req.body.id)
+  } catch (e) {
+    next(createError(e))
+  }
+  addUserInfo(req.body)
   res.redirect('/login')
 })
 
