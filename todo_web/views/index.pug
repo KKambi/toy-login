@@ -3,5 +3,11 @@ extends layout
 block content
   h1
   | 메인페이지
-  | #{existence}
-  | #{name}
+
+  a(href="/users/new") 회원가입
+  a(href="/sessions/new") 로그인
+
+  if existence
+    | #{name}님, 환영합니다^^
+  else
+    | 로그인해주세요.

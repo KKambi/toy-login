@@ -13,7 +13,8 @@ const { createUniqueId } = require('../public/javascripts/uuid_util.js')
 
 // GET to login page
 router.get('/new', function (req, res, next) {
-    res.render('todo_login');
+    const valid = req.query.valid;
+    res.render('todo_login', { valid: valid });
 });
 
 // POST for login
@@ -31,8 +32,7 @@ router.post('/create', function (req, res, next) {
         res.redirect(INDEX_PATH)
     }
     else{
-        //TODO: 입력정보가 틀렸으므로, 다시 로그인하도록 유도
-        res.redirect('./new')
+        res.redirect('./new?valid=false',)
     }
 })
 
