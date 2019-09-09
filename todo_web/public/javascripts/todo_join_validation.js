@@ -45,11 +45,31 @@ const validationForId = {
     hasInvalidCharacter(id) {
         return this.regExp.test(id);
     },
+    isDuplicated(id){
+        // 응답에 대한 반응함수 설정
+        let httpRequest = new XMLHttpRequest()
+        let result = false
+        httpRequest.onreadystatechange = function(){
+            //서버로부터 응답을 받음
+            if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200){
+                const response = httpRequest.responseText
+                console.log("응답결과:",response)
+                if (response === 'true') {
+                    result = true;
+                }
+            }
+        }
+        // POST 요청 보내기
+        httpRequest.open('POST', window.location.href + '/duplication-check', false)
+        httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        httpRequest.send(`id=${id}`)
+        return result
+    },
     validateInput(id) {
         if (is_util.isEmpty(id)) return "empty";
         if (this.satisfyLength(id) === false) return "fail"
         if (this.hasInvalidCharacter(id) === true) return "fail";
-        if (this.isDuplicated(id) === true)
+        if (this.isDuplicated(id) === true) return "fail_duplication"
         return "pass";
     }
 }

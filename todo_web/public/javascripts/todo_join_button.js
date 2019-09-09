@@ -56,7 +56,6 @@ const joinButton = {
 
         //check input
         validationList.forEach((validationObject) => {
-            console.log(validationObject)
             if(validationObject.state !== "pass") errorList.push(validationObject.joinError)
         })
         

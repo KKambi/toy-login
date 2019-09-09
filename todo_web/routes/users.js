@@ -19,6 +19,13 @@ router.get('/new', function(req, res, next) {
   res.render('todo_join');
 });
 
+// POST to check duplicate id
+router.post('/new/duplication-check', function(req, res, next){
+  const id = req.body.id
+  const result = Users.isRegistered(id)
+  res.status(200).send(result)
+})
+
 // POST for join
 router.post('/create', function(req, res, next){
   //유저 생성
@@ -34,5 +41,6 @@ router.post('/create', function(req, res, next){
   res.cookie(SESSION_ID_VARIABLE_NAME, uuid, COOKIE_OPTIONS)
   res.redirect(INDEX_PATH)
 })
+
 
 module.exports = router;
