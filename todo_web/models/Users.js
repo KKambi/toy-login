@@ -1,4 +1,4 @@
-let { userTable } = require('../../../DB/User.js')
+let { userTable } = require('../databases/User.js')
 
 /**
  * Check if two ids same
@@ -7,7 +7,7 @@ let { userTable } = require('../../../DB/User.js')
  * @param {string} existentId id from userTable
  * @return {boolean} 
  */
-const isIdSame = function(newId, existentId){
+const isSame = function(newId, existentId){
     return newId === existentId 
 }
 
@@ -20,7 +20,7 @@ const isIdSame = function(newId, existentId){
 const isRegistered = function(id){
     let ids = Object.keys(userTable)
     return ids.some((existentId) => {
-        return isIdSame(id, existentId)
+        return isSame(id, existentId)
     }) 
 }
 
@@ -41,11 +41,11 @@ const isCorrectPassword = function(id, password){
  * @param {obejct} userJson body of request from join
  * @return {} 
  */
-const addUser = function(userJson){
+const create = function(userJson){
     let id = userJson.id
     delete userJson.id
 
-    userTable[id] = userJson
+    userTable[id] = userJson    //userDB의 key:value = id:info
     console.log(userTable)
 }
 
@@ -60,7 +60,7 @@ const getName = function(id){
 }
 
 module.exports = {
-    addUser,
+    create,
     isRegistered,
     isCorrectPassword,
     getName

@@ -1,4 +1,4 @@
-let { sessionTable } = require('../../../DB/Session.js')
+let { sessionTable } = require('../databases/Session.js')
 
 /**
  * Check if two session ids same
@@ -7,7 +7,7 @@ let { sessionTable } = require('../../../DB/Session.js')
  * @param {string} existentSessionId existentSessionId from sessionTable
  * @return {boolean} 
  */
-const isSessionIdSame = function(newSessionId, existentSessionId){
+const isSame = function(newSessionId, existentSessionId){
     return newSessionId === existentSessionId 
 }
 
@@ -18,9 +18,11 @@ const isSessionIdSame = function(newSessionId, existentSessionId){
  * @return {boolean} 
  */
 const isRegistered = function(sessionId){
+    if (sessionId === undefined || sessionId.length === 0) return false;
+    
     let sessionIds = Object.keys(sessionTable)
     return sessionIds.some((existentSessionId) => {
-        return isSessionIdSame(sessionId, existentSessionId)
+        return isSame(sessionId, existentSessionId)
     }) 
 }
 
@@ -32,7 +34,7 @@ const isRegistered = function(sessionId){
  * @param {string} userName name of user
  * @return {} 
  */
-const addSession = function(sessionId, id, userName){
+const create = function(sessionId, id, userName){
     sessionTable[sessionId] = {
         id: id,
         name: userName
@@ -51,6 +53,6 @@ const getName = function(sessionId){
 
 module.exports = {
     isRegistered,
-    addSession,
+    create,
     getName
 }

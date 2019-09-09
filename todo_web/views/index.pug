@@ -4,10 +4,11 @@ block content
   h1
   | 메인페이지
 
-  a(href="/users/new") 회원가입
-  a(href="/sessions/new") 로그인
-
-  if existence
-    | #{name}님, 환영합니다^^
-  else
-    | 로그인해주세요.
+  div
+    if existence
+      | #{name}님, 환영합니다^^
+      a(href="/sessions/destroy") 로그아웃
+    else
+      | 로그인해주세요.
+      a(href="/users/new") 회원가입
+      a(href="/sessions/new") 로그인

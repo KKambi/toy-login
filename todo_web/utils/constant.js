@@ -1,5 +1,8 @@
-const INDEX_PATH = "../"
+const INDEX_PATH = "/"
 const MIN_30_TO_MS = 1800000
+const COOKIE_OPTIONS = {
+    
+}
 
 module.exports = {
     INDEX_PATH,
