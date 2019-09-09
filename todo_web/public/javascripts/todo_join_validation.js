@@ -53,7 +53,6 @@ const validationForId = {
             //서버로부터 응답을 받음
             if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200){
                 const response = httpRequest.responseText
-                console.log("응답결과:",response)
                 if (response === 'true') {
                     result = true;
                 }
