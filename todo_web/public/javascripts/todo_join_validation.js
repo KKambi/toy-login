@@ -28,6 +28,10 @@ const validationForId = {
             messageUtil.addFailMessage("#id-message", message.id.fail); 
             constant.setState("fail", validationForId)
         },
+        fail_duplication: () => {
+            messageUtil.addFailMessage("#id-message", message.id.fail_duplication); 
+            constant.setState("fail", validationForId)
+        }
     },
 
     init(){
@@ -43,8 +47,9 @@ const validationForId = {
     },
     validateInput(id) {
         if (is_util.isEmpty(id)) return "empty";
-        if (this.satisfyLength(id) == false) return "fail"
-        if (this.hasInvalidCharacter(id) == true) return "fail";
+        if (this.satisfyLength(id) === false) return "fail"
+        if (this.hasInvalidCharacter(id) === true) return "fail";
+        if (this.isDuplicated(id) === true)
         return "pass";
     }
 }
@@ -96,10 +101,10 @@ const validationPassword = {
     },
     validateInput(password) {
         if (is_util.isEmpty(password)) return "empty";
-        if (this.satisfyLength(password) == false) return "fail_length";
-        if (this.hasUpperCase(password) == false
-            || this.hasNumber(password) == false
-            || this.hasSpecial(password) == false) return "fail_character";
+        if (this.satisfyLength(password) === false) return "fail_length";
+        if (this.hasUpperCase(password) === false
+            || this.hasNumber(password) === false
+            || this.hasSpecial(password) === false) return "fail_character";
         return "pass";
     }
 }
@@ -134,7 +139,7 @@ const validationPasswordReconfirm = {
     },
     validateInput(passwordReconfirm) {
         if (is_util.isEmpty(passwordReconfirm)) return "empty";
-        if (this.isEqual(passwordReconfirm) == false) return "fail";
+        if (this.isEqual(passwordReconfirm) === false) return "fail";
         return "pass";
     }
 }
@@ -170,7 +175,7 @@ const validationName = {
     },
     validateInput(name) {
         if (is_util.isEmpty(name)) return "empty";
-        if (this.hasInvalidCharacter(name) == true) return "fail";
+        if (this.hasInvalidCharacter(name) === true) return "fail";
         return "pass";
     }
 }
@@ -265,7 +270,7 @@ const validationPhone = {
         return false;
     },
     validateInput(phone) {
-        if (is_util.isEmpty(phone)) return "fail";
+        if (is_util.isEmpty(phone) === true) return "fail";
         if (this.hasValidForm(phone) === false) return "fail";
         return "pass";
     }
@@ -329,14 +334,14 @@ const validationBirthDate = {
     },
     validateInput(birthDate) {
         const [year, month, day] = birthDate;
-        if (is_util.isEmpty(year)) return "fail_invalid";
-        if (this.has4digitYear(year) == false) return "fail_invalid";
-        if (this.isInvalidYear(year) == true) return "fail_range";
+        if (is_util.isEmpty(year) === true) return "fail_invalid";
+        if (this.has4digitYear(year) === false) return "fail_invalid";
+        if (this.isInvalidYear(year) === true) return "fail_range";
 
-        if (is_util.isEmpty(month)) return "fail_invalid";
+        if (is_util.isEmpty(month) === true) return "fail_invalid";
 
-        if (is_util.isEmpty(day)) return "fail_invalid";
-        if (this.isValidDay(year, month, day) == false) return "fail_day";
+        if (is_util.isEmpty(day) === true) return "fail_invalid";
+        if (this.isValidDay(year, month, day) === false) return "fail_day";
 
         return "pass";
     }

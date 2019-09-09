@@ -45,6 +45,7 @@ const message = {
     id: {
         pass: "사용 가능한 아이디입니다.",
         fail: "5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.",
+        fail_duplication: "이미 존재하는 아이디입니다."
     },
     password: {
         pass: "안전한 비밀번호입니다.",
