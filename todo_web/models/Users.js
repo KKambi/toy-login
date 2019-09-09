@@ -1,4 +1,5 @@
-let { userTable } = require('../databases/User.js')
+const { userTable } = require('../databases/User.js')
+const { encryptAsync } = require('../utils/encryption_util.js')
 
 /**
  * Check if two ids same
@@ -41,10 +42,18 @@ const isCorrectPassword = function(id, password){
  * @param {obejct} userJson body of request from join
  * @return {} 
  */
-const create = function(userJson){
-    let id = userJson.id
+const create = async function(userJson){
+    //id를 userTable의 key로 이용
+    const id = userJson.id
     delete userJson.id
 
+    //password 단방향 암호화
+    const password = userJson.password
+    const saltAndKey = await encryptAsync(password)
+    userJson.salt = saltAndKey[0]
+    userJson.password = saltAndKey[1]
+
+    //userTable에 저장
     userTable[id] = userJson    //userDB의 key:value = id:info
     console.log(userTable)
 }
