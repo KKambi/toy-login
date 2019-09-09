@@ -1,10 +1,10 @@
 {
   "name": "membership-login",
   "version": "1.0.0",
-  "description": "0. CSS 클래스 네이밍 / CSS variable 학습",
+  "description": "",
   "main": "todo_join_button.js",
   "scripts": {
-    "start": "node .todo_web/bin/www",
+    "start": "node ./todo_web/bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
