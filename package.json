@@ -1,26 +1,18 @@
 {
-  "name": "membership-login",
-  "version": "1.0.0",
-  "description": "",
-  "main": "todo_join_button.js",
+  "name": "todo",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "node ./todo_web/bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KKambi/membership-login.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KKambi/membership-login/issues"
-  },
-  "homepage": "https://github.com/KKambi/membership-login#readme",
   "dependencies": {
-    "consolidate": "^0.15.1",
-    "express": "^4.17.1",
-    "geckodriver": "^1.16.2",
-    "selenium-webdriver": "^4.0.0-alpha.4"
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11",
+    "uuid": "^3.3.3"
   }
 }
