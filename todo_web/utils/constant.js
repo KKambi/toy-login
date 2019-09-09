@@ -3,7 +3,7 @@ const MIN_30_TO_MS = 1800000
 const SESSION_ID_VARIABLE_NAME = "sessionId"
 const COOKIE_OPTIONS = {
     maxAge: MIN_30_TO_MS,
-    // httpOnly: true
+    httpOnly: true
 }
 
 module.exports = {

@@ -41,6 +41,10 @@ const create = function(sessionId, id, userName){
     }
 }
 
+const destroy = function(sessionId){
+    delete sessionTable[sessionId]
+}
+
 /**
  * Get user name from sessionTable
  *
@@ -54,5 +58,6 @@ const getName = function(sessionId){
 module.exports = {
     isRegistered,
     create,
+    destroy,
     getName
 }

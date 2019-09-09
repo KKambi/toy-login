@@ -43,7 +43,8 @@ router.post('/create', function (req, res, next) {
 router.post('/destroy', function (req, res, next){
     const sessionId = req.cookies.sessionId
     if (Sessions.isRegistered(sessionId) === true){
-        res.clearCookie(SESSION_ID_VARIABLE_NAME)
+        Sessions.destroy(sessionId)     //서버 측 세션ID 삭제
+        res.clearCookie(SESSION_ID_VARIABLE_NAME)   //클라이언트 측 쿠키 삭제
     }
     res.redirect(INDEX_PATH)
 })
