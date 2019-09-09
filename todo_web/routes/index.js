@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-/* constant variable */
-const { INDEX_PATH, MIN_30_TO_MS } = require('../utils/constant.js')
-
 /* import module */
 const Sessions = require('../models/Sessions.js')
 

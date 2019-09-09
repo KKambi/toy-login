@@ -7,7 +7,8 @@ block content
   div
     if existence
       | #{name}님, 환영합니다^^
-      a(href="/sessions/destroy") 로그아웃
+      a(style="cursor: pointer;" onclick="document.querySelector('#login-form').submit();") 로그아웃
+      form#login-form(action="/sessions/destroy" method="POST" style="display:none;")
     else
       | 로그인해주세요.
       a(href="/users/new") 회원가입

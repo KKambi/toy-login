@@ -4,7 +4,10 @@ var createError = require('http-errors');
 var router = express.Router();
 
 /* constant variable */
-const { INDEX_PATH, MIN_30_TO_MS } = require('../utils/constant.js')
+const { 
+    INDEX_PATH, 
+    SESSION_ID_VARIABLE_NAME,
+    COOKIE_OPTIONS } = require('../utils/constant.js')
 
 /* import module */
 const Users = require('../models/Users.js')
@@ -28,7 +31,7 @@ router.post('/create', function (req, res, next) {
 
         Sessions.create(uuid, id, name)
 
-        res.cookie('sessionId', uuid, { maxAge: MIN_30_TO_MS })
+        res.cookie(SESSION_ID_VARIABLE_NAME, uuid, COOKIE_OPTIONS)
         res.redirect(INDEX_PATH)
     }
     else{
@@ -40,9 +43,9 @@ router.post('/create', function (req, res, next) {
 router.post('/destroy', function (req, res, next){
     const sessionId = req.cookies.sessionId
     if (Sessions.isRegistered(sessionId) === true){
-        userName = Sessions.getName(sessionId)
-        sessionExsitence = true;
+        res.clearCookie(SESSION_ID_VARIABLE_NAME)
     }
+    res.redirect(INDEX_PATH)
 })
 
 module.exports = router;
