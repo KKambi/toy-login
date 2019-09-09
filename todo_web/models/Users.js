@@ -1,5 +1,6 @@
+const crypto = require('crypto')
 const { userTable } = require('../databases/User.js')
-const { encryptAsync } = require('../utils/encryption_util.js')
+const encryption_util = require('../utils/encryption_util.js')
 
 /**
  * Check if two ids same
@@ -33,7 +34,10 @@ const isRegistered = function(id){
  * @return {boolean} 
  */
 const isCorrectPassword = function(id, password){
-    return userTable[id].password === password
+    const inputPassword = password
+    const storedSalt = userTable[id].salt
+    const storedPassword = userTable[id].password
+    return encryption_util.isSame(inputPassword, storedSalt, storedPassword)
 }
 
 /**
@@ -42,14 +46,14 @@ const isCorrectPassword = function(id, password){
  * @param {obejct} userJson body of request from join
  * @return {} 
  */
-const create = async function(userJson){
+const create = function(userJson){
     //id를 userTable의 key로 이용
     const id = userJson.id
     delete userJson.id
 
     //password 단방향 암호화
     const password = userJson.password
-    const saltAndKey = await encryptAsync(password)
+    const saltAndKey = encryption_util.encryptAsync(password)
     userJson.salt = saltAndKey[0]
     userJson.password = saltAndKey[1]
 

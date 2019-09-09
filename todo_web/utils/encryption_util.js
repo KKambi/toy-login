@@ -3,21 +3,40 @@ const REPEAT_TIME = 108236
 const PASSWORD_LENGTH = 64
 const HASH_ALGORITHM = 'sha512'
 
-//출처: https://www.zerocho.com/category/NodeJS/post/593a487c2ed1da0018cff95d
-const encryptAsync = function(password){
+/**
+ * Return salt and encrpyted password as promise object
+ * 출처: https://www.zerocho.com/category/NodeJS/post/593a487c2ed1da0018cff95d
+ * 
+ * @param {string} password password of request from login
+ * @return {void} 
+ */
+const encryptAsync = function (password) {
     let encryptedPassword;
     let salt;
-    return new Promise((resolve, reject) => {
-        crypto.randomBytes(64, function(err, buf){
-            salt = buf.toString('base64')
-            crypto.pbkdf2(password, salt, REPEAT_TIME, PASSWORD_LENGTH, HASH_ALGORITHM, async function(err, key){
-                encryptedPassword = key.toString('base64')
-                resolve([salt, encryptedPassword])
-            });
-        });
-    })
+    salt = crypto.randomBytes(64).toString('base64')
+    encryptedPassword = crypto.pbkdf2Sync(password, salt, REPEAT_TIME, PASSWORD_LENGTH, HASH_ALGORITHM)
+        .toString('base64')
+    return [salt, encryptedPassword]
+}
+
+/**
+ * Check if input password matched to stored password
+ *
+ * @param {string} inputPassword password of request from login
+ * @param {string} inputPassword stored salt of that id
+ * @param {string} storedPassword stored password of that id
+ * @return {boolean} 
+ */
+const isSame = function (inputPassword, storedSalt, storedPassword) {
+    const encryptedPassword = crypto.pbkdf2Sync(inputPassword, storedSalt, REPEAT_TIME, PASSWORD_LENGTH, HASH_ALGORITHM)
+        .toString('base64')
+    return encryptedPassword === storedPassword
 }
 
 module.exports = {
-    encryptAsync
+    REPEAT_TIME,
+    PASSWORD_LENGTH,
+    HASH_ALGORITHM,
+    encryptAsync,
+    isSame
 } 
