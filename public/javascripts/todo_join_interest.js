@@ -63,10 +63,10 @@ const tags = {
         let spanNode = this.wrapper
         .lastChild
         .previousSibling
-        .previousSibling
         spanNode.parentNode.removeChild(spanNode)
         
         let tagString = tagList[tagList.length-1]
+        console.log(tagString)
         this.removeTag(tagList, tagString)
         input.value = tagString
         input.size = tagString.length
