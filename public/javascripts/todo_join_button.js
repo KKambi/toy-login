@@ -108,5 +108,3 @@ const joinButton = {
     }
 }
 
-initializationButton.init()
-joinButton.init()

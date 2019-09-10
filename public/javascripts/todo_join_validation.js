@@ -403,12 +403,3 @@ const validationList = [
     validationEmail, validationPhone, validationInterest
 ]
 
-validationForId.init();
-validationPassword.init();
-validationPasswordReconfirm.init();
-validationName.init();
-validationBirthDate.init();
-validationGender.init();
-validationEmail.init();
-validationPhone.init();
-validationInterest.init();

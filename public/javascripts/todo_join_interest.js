@@ -111,7 +111,3 @@ const interest = {
         }.bind(tags))
     }
 }
-
-tags.addFocus();
-tags.addAutoChangeSize();
-interest.init();

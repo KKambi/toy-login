@@ -58,7 +58,7 @@
 }
 
 /* section */
-.wrapper {
+#wrapper {
     font-size: var(--content-font-size);
     display: flex;
     justify-content: center;

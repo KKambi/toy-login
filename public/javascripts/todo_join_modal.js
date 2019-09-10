@@ -93,4 +93,3 @@ const term = {
     }
 }
 
-term.init()

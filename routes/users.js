@@ -15,8 +15,34 @@ const Sessions = require('../models/Sessions.js')
 const { createUniqueId } = require('../utils/uuid_util.js')
 
 // GET to join page
+// router.get('/new', function(req, res, next) {
+//   res.render('todo_join');
+// });
+
+// GET to join page
+// PJAX TEST
+const fs = require('fs')
+const path = require('path')
 router.get('/new', function(req, res, next) {
-  res.render('todo_join');
+  res.format({
+    'text/html': function(){
+      console.log("join_html")
+      res.render(path.join(__dirname, '/../views/todo_join_content.pug'));
+    },
+    // AJAX 요청
+    'application/json': function(){
+      console.log("join_ajax")
+      try{
+        res.send(JSON.parse(fs.readFileSync(path.join(__dirname, '/../views/todo_join_content.pug'), 'utf8')));
+      } catch (e){
+        console.log(e);
+      }
+    },
+    'default': function() {
+      // log the request and respond with 406
+      res.status(406).send('Not Acceptable');
+    }
+  })
 });
 
 // POST to check duplicate id
