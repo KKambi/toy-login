@@ -1,15 +1,22 @@
-extends layout
-
-block content
-  h1
-  | 메인페이지
-
-  div
-    if existence
-      | #{name}님, 환영합니다^^
-      a(style="cursor: pointer;" onclick="document.querySelector('#login-form').submit();") 로그아웃
-      form#login-form(action="/sessions/destroy" method="POST" style="display:none;")
-    else
-      | 로그인해주세요.
-      a(href="/users/new") 회원가입
-      a(href="/sessions/new") 로그인
+doctype html
+html
+  head
+    title todo
+    
+    link(rel='stylesheet' type='text/css' href='/stylesheets/reset.css')
+    link(rel='stylesheet' type='text/css' href='/stylesheets/todo_index.css')
+    link(href='https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap' rel='stylesheet')
+    meta(charset='UTF-8')
+  body
+    #wrapper
+      #container
+        if existence
+          #title #{name}님, 환영합니다^^
+          #content
+            a(style="cursor: pointer;" onclick="document.querySelector('#login-form').submit();") 로그아웃
+            form#login-form(action="/sessions/destroy" method="POST" style="display:none;")
+        else
+          #title 로그인해주세요
+          #content
+            a(href="/users/new") 회원가입
+            a(href="/sessions/new") 로그인

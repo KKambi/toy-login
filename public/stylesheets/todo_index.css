@@ -1,0 +1,69 @@
+/* CSS Variables */
+:root{
+    --default-margin: 10px;
+    --default-padding: 10px;
+  
+    --body-background-color: #F5F6F7;
+    --body-font-family: 'Noto Sans KR', sans-serif;
+  
+    --title-font-size: 3rem;
+    --title-font-color: #08A600;
+    --title-font-weight: 900;
+  
+    --content-font-size: 1.3rem;
+    --content-font-color: #000000;
+    --content-font-weight: 900;
+  
+    --input-height: 50px;
+    --input-border-color: #DADADA;
+    --input-border-width: 1px;
+    --input-padding-left-right: 14px;
+    --input-padding-up-down: 10px;
+    
+    --primary-button-size: 2rem;
+    --primary-button-font-weight: 500;
+  
+    --pass-font-color: #08A600;
+    --error-font-color: #FF0000;
+    --message-font-size: 1.3rem;
+    --message-font-weight: 500;
+    --message-top-margin: 5px;
+  
+    --button-background-color: #08A600;
+}
+
+#wrapper{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    margin: var(--default-margin);
+    text-decoration: none;
+}
+
+a:link, a:visited, a:active{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--title-font-color)
+}
+
+#title{
+    text-align: center;
+    font-size: 3rem;
+}
+
+#content{
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-around;
+    margin: var(--default-margin);
+}
